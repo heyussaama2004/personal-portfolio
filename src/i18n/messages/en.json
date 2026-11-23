@@ -109,9 +109,21 @@
     "message": "Message",
     "consent": "I agree to be contacted about my request",
     "submit": "Send request",
+    "sending": "Sending…",
+    "openForm": "Open quote form",
     "success": "Your request has been sent.",
     "error": "The request could not be sent. Please try again.",
-    "honeypot": "Leave this field empty"
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address.",
+    "minMessage": "Please describe your project in at least 20 characters.",
+    "consentRequired": "Please confirm that we may contact you.",
+    "honeypot": "Leave this field empty",
+    "status": {
+      "disabled": "Direct submission isn't enabled yet.",
+      "provider_error": "The request could not be sent. Please try again.",
+      "rate_limited": "Too many requests. Please try again shortly.",
+      "network": "The request could not be sent. Check your connection."
+    }
   },
   "os": {
     "boot": "Starting workspace",
@@ -141,6 +153,7 @@
     "replayBoot": "Replay boot",
     "resetWindows": "Reset windows",
     "noWindows": "No open windows",
+    "openForm": "Open quote form",
     "backToLauncher": "Back to launcher",
     "commandPalette": "Command palette"
   },

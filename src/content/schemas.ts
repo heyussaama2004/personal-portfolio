@@ -11,6 +11,15 @@ export const projectCategorySchema = z.enum([
 
 export const skillLevelSchema = z.enum(["core", "working", "learning"]);
 
+export const projectTypeSchema = z.enum([
+  "website",
+  "business",
+  "webapp",
+  "backend",
+  "automation",
+  "api",
+]);
+
 export const projectSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
@@ -34,7 +43,7 @@ export const projectSchema = z.object({
 export type Project = z.infer<typeof projectSchema>;
 
 export const serviceSchema = z.object({
-  id: z.enum(["website", "business", "webapp", "backend", "automation", "api"]),
+  id: projectTypeSchema,
   title: localizedTextSchema,
   description: localizedTextSchema,
   order: z.number().int().default(100),

@@ -185,6 +185,12 @@ export function AppContent({
         ) : (
           <p className="mt-4 text-sm text-muted">{common("noDirectContact")}</p>
         )}
+        <Link
+          href="/quote"
+          className="mt-4 inline-flex rounded-lg border border-line px-4 py-2 text-sm hover:text-primary"
+        >
+          {os("openForm")}
+        </Link>
       </div>
     );
   }

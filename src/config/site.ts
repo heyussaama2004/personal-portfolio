@@ -118,7 +118,7 @@ export const siteConfig: SiteConfig = siteConfigSchema.parse({
   contact: {
     email: undefined,
     whatsapp: { number: undefined, approved: false },
-    contactFormEnabled: false,
+    contactFormEnabled: Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO_EMAIL),
   },
   cv: {},
   branding: {

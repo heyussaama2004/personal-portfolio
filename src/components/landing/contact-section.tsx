@@ -1,4 +1,5 @@
 import { Mail, MessageCircle } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import { Section } from "@/components/ui/section";
 import { siteConfig } from "@/config/site";
@@ -40,6 +41,12 @@ export async function ContactSection() {
           {t("unconfigured")}
         </p>
       )}
+      <Link
+        href="/quote"
+        className="mt-6 inline-flex h-11 items-center rounded-lg border border-line bg-surface px-5 text-sm font-medium transition-colors hover:text-primary"
+      >
+        {t("openForm")}
+      </Link>
     </Section>
   );
 }

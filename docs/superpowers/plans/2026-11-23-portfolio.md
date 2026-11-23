@@ -91,11 +91,11 @@
 
 **Files:** `src/lib/contact/**`, `src/app/[locale]/quote/route.ts` or server action, `src/components/contact/**`, `.env.example`.
 
-- [ ] Zod-shared form validation, accessible errors, all states including unconfigured.
-- [ ] Provider interface with `disabled` fallback and Resend via `fetch` when env vars exist.
-- [ ] Honeypot, minimum submit time, best-effort in-memory rate limit, sanitization, no data storage.
-- [ ] Unit-test validation and provider fallback; e2e success/error/unconfigured.
-- [ ] Gate and commit `feat: contact system`.
+- [x] Zod-shared form validation, accessible errors, all states including unconfigured.
+- [x] Provider interface with `disabled` fallback and Resend via `fetch` when env vars exist.
+- [x] Honeypot, minimum submit time, best-effort in-memory rate limit, sanitization, no data storage.
+- [x] Unit-test validation and provider fallback; e2e success/error/unconfigured.
+- [x] Gate and commit `feat: contact system`.
 
 ## Task 7: SEO, privacy, security
 

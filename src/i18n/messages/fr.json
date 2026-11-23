@@ -109,9 +109,21 @@
     "message": "Message",
     "consent": "J'accepte d'être contacté au sujet de ma demande",
     "submit": "Envoyer la demande",
+    "sending": "Envoi en cours…",
+    "openForm": "Ouvrir le formulaire de devis",
     "success": "Votre demande a été envoyée.",
     "error": "La demande n'a pas pu être envoyée. Veuillez réessayer.",
-    "honeypot": "Laissez ce champ vide"
+    "required": "Ce champ est obligatoire.",
+    "invalidEmail": "Saisissez une adresse e-mail valide.",
+    "minMessage": "Décrivez votre projet en au moins 20 caractères.",
+    "consentRequired": "Veuillez confirmer que nous pouvons vous contacter.",
+    "honeypot": "Laissez ce champ vide",
+    "status": {
+      "disabled": "L'envoi direct n'est pas encore activé.",
+      "provider_error": "La demande n'a pas pu être envoyée. Veuillez réessayer.",
+      "rate_limited": "Trop de demandes. Veuillez réessayer bientôt.",
+      "network": "La demande n'a pas pu être envoyée. Vérifiez votre connexion."
+    }
   },
   "os": {
     "boot": "Démarrage de l'espace de travail",
@@ -141,6 +153,7 @@
     "replayBoot": "Rejouer le démarrage",
     "resetWindows": "Réinitialiser les fenêtres",
     "noWindows": "Aucune fenêtre ouverte",
+    "openForm": "Ouvrir le formulaire de devis",
     "backToLauncher": "Retour au lanceur",
     "commandPalette": "Palette de commandes"
   },
