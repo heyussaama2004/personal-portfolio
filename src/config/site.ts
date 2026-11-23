@@ -1,12 +1,12 @@
-import { z } from "zod";
+import { z } from "zod"
 
-const localeSchema = z.enum(["en", "fr", "ar"]);
+const localeSchema = z.enum(["en", "fr", "ar"])
 
 export const localizedTextSchema = z.object({
   en: z.string().optional(),
   fr: z.string().optional(),
   ar: z.string().optional(),
-});
+})
 
 const socialsSchema = z.object({
   github: z.string().url().optional(),
@@ -23,7 +23,7 @@ const socialsSchema = z.object({
       }),
     )
     .default([]),
-});
+})
 
 const contactSchema = z.object({
   email: z.string().email().optional(),
@@ -34,13 +34,13 @@ const contactSchema = z.object({
     })
     .default({ approved: false }),
   contactFormEnabled: z.boolean(),
-});
+})
 
 const cvSchema = z.object({
   en: z.string().optional(),
   fr: z.string().optional(),
   ar: z.string().optional(),
-});
+})
 
 const brandingSchema = z.object({
   logo: z.string().optional(),
@@ -49,12 +49,12 @@ const brandingSchema = z.object({
     primary: z.string().min(1),
     secondary: z.string().min(1),
   }),
-});
+})
 
 const analyticsSchema = z.object({
   provider: z.enum(["none", "vercel", "umami", "plausible"]),
   enabled: z.boolean(),
-});
+})
 
 export const siteConfigSchema = z.object({
   owner: z.object({
@@ -79,12 +79,12 @@ export const siteConfigSchema = z.object({
     defaultLocale: localeSchema,
     ogImage: z.string().optional(),
   }),
-});
+})
 
-export type SiteConfig = z.infer<typeof siteConfigSchema>;
-export type LocalizedText = z.infer<typeof localizedTextSchema>;
+export type SiteConfig = z.infer<typeof siteConfigSchema>
+export type LocalizedText = z.infer<typeof localizedTextSchema>
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
 
 export const siteConfig: SiteConfig = siteConfigSchema.parse({
   owner: {
@@ -128,4 +128,4 @@ export const siteConfig: SiteConfig = siteConfigSchema.parse({
   },
   analytics: { provider: "none", enabled: false },
   site: { url: siteUrl, defaultLocale: "en" },
-});
+})

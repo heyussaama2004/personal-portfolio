@@ -1,8 +1,8 @@
-type CspOptions = { nonce: string; isDev: boolean };
+type CspOptions = { nonce: string; isDev: boolean }
 
 export function buildCspHeader({ nonce, isDev }: CspOptions): string {
-  const devScript = isDev ? " 'unsafe-eval'" : "";
-  const devConnect = isDev ? " ws: wss:" : "";
+  const devScript = isDev ? " 'unsafe-eval'" : ""
+  const devConnect = isDev ? " ws: wss:" : ""
 
   return [
     "default-src 'self'",
@@ -20,20 +20,20 @@ export function buildCspHeader({ nonce, isDev }: CspOptions): string {
     "frame-src 'none'",
     "frame-ancestors 'none'",
     "form-action 'self'",
-  ].join("; ");
+  ].join("; ")
 }
 
 export function buildSecurityHeaders(nonce: string, isDev: boolean): Headers {
-  const headers = new Headers();
+  const headers = new Headers()
 
-  headers.set("Content-Security-Policy", buildCspHeader({ nonce, isDev }));
-  headers.set("X-Content-Type-Options", "nosniff");
-  headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  headers.set("Content-Security-Policy", buildCspHeader({ nonce, isDev }))
+  headers.set("X-Content-Type-Options", "nosniff")
+  headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
   headers.set(
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(self)",
-  );
-  headers.set("X-Frame-Options", "DENY");
+  )
+  headers.set("X-Frame-Options", "DENY")
 
-  return headers;
+  return headers
 }

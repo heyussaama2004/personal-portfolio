@@ -1,4 +1,4 @@
-import type { SkillGroup } from "./schemas";
+import type { SkillGroup } from "./schemas"
 
 export const skillGroups: SkillGroup[] = [
   {
@@ -60,4 +60,4 @@ export const skillGroups: SkillGroup[] = [
       { name: "Vercel", level: "working" },
     ],
   },
-];
+]

@@ -1,17 +1,17 @@
-import { Terminal } from "lucide-react";
-import { getTranslations } from "next-intl/server";
-import { siteConfig } from "@/config/site";
-import { LanguageSwitcher } from "@/components/ui/language-switcher";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Link } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
-import { availableCvLocales } from "@/lib/config/visibility";
+import { Terminal } from "lucide-react"
+import { getTranslations } from "next-intl/server"
+import { siteConfig } from "@/config/site"
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
+import { Link } from "@/i18n/navigation"
+import type { Locale } from "@/i18n/routing"
+import { availableCvLocales } from "@/lib/config/visibility"
 
 export async function SiteHeader({ locale }: { locale: Locale }) {
-  const t = await getTranslations("nav");
-  const os = await getTranslations("os");
-  const cvLocales = availableCvLocales(siteConfig);
-  const firstCv = cvLocales[0];
+  const t = await getTranslations("nav")
+  const os = await getTranslations("os")
+  const cvLocales = availableCvLocales(siteConfig)
+  const firstCv = cvLocales[0]
 
   return (
     <header className="glass sticky top-0 z-40 rounded-none border-x-0 border-t-0">
@@ -67,5 +67,5 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
         </div>
       </nav>
     </header>
-  );
+  )
 }

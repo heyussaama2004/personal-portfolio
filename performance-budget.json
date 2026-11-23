@@ -1,0 +1,9 @@
+{
+  "maxFirstLoadJsBytes": 600000,
+  "maxChunkBytes": 250000,
+  "routes": {
+    "/[locale]": { "lcpBudgetMs": 2500 },
+    "/[locale]/projects": { "lcpBudgetMs": 2500 },
+    "/[locale]/privacy": { "lcpBudgetMs": 2500 }
+  }
+}

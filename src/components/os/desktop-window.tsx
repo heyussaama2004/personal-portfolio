@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { Maximize2, Minimize2, Minus, X } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useRef, type PointerEvent, type ReactNode } from "react";
-import type { OsWindow } from "@/lib/os/window-manager/types";
+import { Maximize2, Minimize2, Minus, X } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { useRef, type PointerEvent, type ReactNode } from "react"
+import type { OsWindow } from "@/lib/os/window-manager/types"
 
 export function DesktopWindow({
   window,
@@ -15,47 +15,53 @@ export function DesktopWindow({
   onToggleMaximize,
   onClose,
 }: {
-  window: OsWindow;
-  active: boolean;
-  children: ReactNode;
-  onFocus: () => void;
-  onMove: (bounds: { x: number; y: number }) => void;
-  onMinimize: () => void;
-  onToggleMaximize: () => void;
-  onClose: () => void;
+  window: OsWindow
+  active: boolean
+  children: ReactNode
+  onFocus: () => void
+  onMove: (bounds: { x: number; y: number }) => void
+  onMinimize: () => void
+  onToggleMaximize: () => void
+  onClose: () => void
 }) {
-  const t = useTranslations("os");
-  const drag = useRef<{ pointerX: number; pointerY: number; x: number; y: number } | null>(null);
+  const t = useTranslations("os")
+  const drag = useRef<{ pointerX: number; pointerY: number; x: number; y: number } | null>(null)
 
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
-    if (window.maximized || (event.target as HTMLElement).closest("button")) return;
+    if (window.maximized || (event.target as HTMLElement).closest("button")) return
     drag.current = {
       pointerX: event.clientX,
       pointerY: event.clientY,
       x: window.x,
       y: window.y,
-    };
-    event.currentTarget.setPointerCapture(event.pointerId);
-    onFocus();
+    }
+    event.currentTarget.setPointerCapture(event.pointerId)
+    onFocus()
   }
 
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
-    if (!drag.current) return;
+    if (!drag.current) return
     onMove({
       x: drag.current.x + event.clientX - drag.current.pointerX,
       y: drag.current.y + event.clientY - drag.current.pointerY,
-    });
+    })
   }
 
   function handlePointerUp() {
-    drag.current = null;
+    drag.current = null
   }
 
   const style = window.maximized
     ? { inset: 0, zIndex: window.z }
-    : { left: window.x, top: window.y, width: window.width, height: window.height, zIndex: window.z };
+    : {
+        left: window.x,
+        top: window.y,
+        width: window.width,
+        height: window.height,
+        zIndex: window.z,
+      }
 
-  if (window.minimized) return null;
+  if (window.minimized) return null
 
   return (
     <section
@@ -91,7 +97,11 @@ export function DesktopWindow({
             title={window.maximized ? t("restore") : t("maximize")}
             className="inline-flex h-7 w-7 items-center justify-center rounded hover:bg-raised"
           >
-            {window.maximized ? <Minimize2 aria-hidden="true" size={14} /> : <Maximize2 aria-hidden="true" size={14} />}
+            {window.maximized ? (
+              <Minimize2 aria-hidden="true" size={14} />
+            ) : (
+              <Maximize2 aria-hidden="true" size={14} />
+            )}
           </button>
           <button
             type="button"
@@ -106,5 +116,5 @@ export function DesktopWindow({
       </div>
       <div className="min-h-0 flex-1 overflow-auto p-4">{children}</div>
     </section>
-  );
+  )
 }

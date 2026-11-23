@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { localizedTextSchema } from "@/config/site";
+import { z } from "zod"
+import { localizedTextSchema } from "@/config/site"
 
 export const projectCategorySchema = z.enum([
   "php-mysql",
@@ -7,9 +7,9 @@ export const projectCategorySchema = z.enum([
   "frontend-experiments",
   "ai-automation",
   "personal",
-]);
+])
 
-export const skillLevelSchema = z.enum(["core", "working", "learning"]);
+export const skillLevelSchema = z.enum(["core", "working", "learning"])
 
 export const projectTypeSchema = z.enum([
   "website",
@@ -18,7 +18,7 @@ export const projectTypeSchema = z.enum([
   "backend",
   "automation",
   "api",
-]);
+])
 
 export const projectSchema = z.object({
   slug: z.string().min(1),
@@ -40,18 +40,18 @@ export const projectSchema = z.object({
   role: z.string().optional(),
   highlights: z.array(localizedTextSchema).default([]),
   body: z.string().optional(),
-});
+})
 
-export type Project = z.infer<typeof projectSchema>;
+export type Project = z.infer<typeof projectSchema>
 
 export const serviceSchema = z.object({
   id: projectTypeSchema,
   title: localizedTextSchema,
   description: localizedTextSchema,
   order: z.number().int().default(100),
-});
+})
 
-export type Service = z.infer<typeof serviceSchema>;
+export type Service = z.infer<typeof serviceSchema>
 
 export const skillGroupSchema = z.object({
   id: z.enum(["frontend", "backend", "databases", "ai", "tools"]),
@@ -63,9 +63,9 @@ export const skillGroupSchema = z.object({
     }),
   ),
   order: z.number().int().default(100),
-});
+})
 
-export type SkillGroup = z.infer<typeof skillGroupSchema>;
+export type SkillGroup = z.infer<typeof skillGroupSchema>
 
 export const experienceSchema = z.object({
   id: z.string().min(1),
@@ -76,9 +76,9 @@ export const experienceSchema = z.object({
   endDate: z.string().optional(),
   description: localizedTextSchema.optional(),
   order: z.number().int().default(100),
-});
+})
 
-export type Experience = z.infer<typeof experienceSchema>;
+export type Experience = z.infer<typeof experienceSchema>
 
 export const testimonialSchema = z.object({
   name: z.string().min(1),
@@ -87,25 +87,25 @@ export const testimonialSchema = z.object({
   quote: z.string().min(1),
   link: z.string().url().optional(),
   consent: z.boolean().default(false),
-});
+})
 
 export const certificationSchema = z.object({
   title: z.string().min(1),
   issuer: z.string().min(1),
   date: z.string().min(1),
   credentialUrl: z.string().url().optional(),
-});
+})
 
 export const metricSchema = z.object({
   label: z.string().min(1),
   value: z.string().min(1),
   source: z.string().min(1),
-});
+})
 
 export const proofCollectionsSchema = z.object({
   testimonials: z.array(testimonialSchema).default([]),
   certifications: z.array(certificationSchema).default([]),
   metrics: z.array(metricSchema).default([]),
-});
+})
 
-export type ProofCollections = z.infer<typeof proofCollectionsSchema>;
+export type ProofCollections = z.infer<typeof proofCollectionsSchema>

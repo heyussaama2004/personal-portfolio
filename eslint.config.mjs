@@ -1,5 +1,5 @@
-import prettier from "eslint-config-prettier";
-import next from "eslint-config-next/core-web-vitals";
+import prettier from "eslint-config-prettier"
+import next from "eslint-config-next/core-web-vitals"
 
 const config = [
   {
@@ -23,6 +23,6 @@ const config = [
     },
   },
   prettier,
-];
+]
 
-export default config;
+export default config

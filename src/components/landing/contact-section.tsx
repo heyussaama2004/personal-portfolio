@@ -1,15 +1,15 @@
-import { Mail, MessageCircle } from "lucide-react";
-import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
-import { Section } from "@/components/ui/section";
-import { siteConfig } from "@/config/site";
-import { canShowEmail, canShowWhatsapp, isDirectContactConfigured } from "@/lib/config/visibility";
+import { Mail, MessageCircle } from "lucide-react"
+import { Link } from "@/i18n/navigation"
+import { getTranslations } from "next-intl/server"
+import { Section } from "@/components/ui/section"
+import { siteConfig } from "@/config/site"
+import { canShowEmail, canShowWhatsapp, isDirectContactConfigured } from "@/lib/config/visibility"
 
 export async function ContactSection() {
-  const t = await getTranslations("contact");
-  const configured = isDirectContactConfigured(siteConfig);
-  const email = canShowEmail(siteConfig) ? siteConfig.contact.email : undefined;
-  const number = canShowWhatsapp(siteConfig) ? siteConfig.contact.whatsapp.number : undefined;
+  const t = await getTranslations("contact")
+  const configured = isDirectContactConfigured(siteConfig)
+  const email = canShowEmail(siteConfig) ? siteConfig.contact.email : undefined
+  const number = canShowWhatsapp(siteConfig) ? siteConfig.contact.whatsapp.number : undefined
 
   return (
     <Section id="contact" title={t("title")} subtitle={t("description")}>
@@ -48,5 +48,5 @@ export async function ContactSection() {
         {t("openForm")}
       </Link>
     </Section>
-  );
+  )
 }

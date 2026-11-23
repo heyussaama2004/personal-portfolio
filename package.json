@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "perf:budget": "node scripts/check-bundle-budget.mjs"
   },
   "dependencies": {
     "framer-motion": "^14.14.0",

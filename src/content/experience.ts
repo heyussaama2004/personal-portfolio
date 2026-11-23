@@ -1,4 +1,4 @@
-import type { Experience } from "./schemas";
+import type { Experience } from "./schemas"
 
 export const experience: Experience[] = [
   {
@@ -50,4 +50,4 @@ export const experience: Experience[] = [
       ar: "بشكل مستقل",
     },
   },
-];
+]

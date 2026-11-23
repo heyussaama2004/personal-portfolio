@@ -1,25 +1,33 @@
 # Content Guide
 
-All personal data and external links live in `src/config/site.ts`. Content lives in `src/content/`.
+All personal data and external links live in `src/config/site.ts`. Content lives in `src/content/`. Missing optional values hide UI; invalid config fails with Zod errors.
 
-## Config fields
+## Config (`src/config/site.ts`)
 
-- `owner`: name, monogram, localized headline and bio, location, availability flags.
-- `socials`: `github`, `linkedin`, `instagram`, `youtube`, `x`, plus `other[]` with `{label, url, icon?}`. Leave a platform `undefined` to hide it everywhere.
-- `contact.email`: leave `undefined` to hide email links.
-- `contact.whatsapp`: set `number` and `approved: true` to show a WhatsApp link. A number without approval is never linked.
-- `contact.contactFormEnabled`: enables direct submission when a provider is configured.
-- `cv`: `en`, `fr`, `ar` paths to PDFs under `public/cv/`. Missing files hide their download buttons.
-- `branding`: optional `logo` and `photo` paths, accent colors.
-- `analytics`: provider and enabled flag; disabled by default.
-- `site`: public URL, default locale, optional OG image.
+- `owner`: name, monogram, localized headline/bio, location, availability flags.
+- `socials`: `github`, `linkedin`, `instagram`, `youtube`, `x`, `other[]` (`{label,url,icon?}`). `undefined` hides.
+- `contact.email`: `undefined` hides.
+- `contact.whatsapp`: requires `number` and `approved: true`; number without approval never linked.
+- `contact.contactFormEnabled`: derived from `RESEND_API_KEY` + `CONTACT_TO_EMAIL`.
+- `cv`: locale-keyed paths to `public/cv/*`; missing files hide download.
+- `branding`: optional logo/photo/accent colors.
+- `analytics`: disabled by default.
+- `site`: `NEXT_PUBLIC_SITE_URL`, default locale, optional OG image.
 
-Invalid config fails the build with a clear Zod error. Missing optional values never fail the build.
+## Projects
 
-## Adding a project
+Add `src/content/projects/<slug>.json` matching `projectSchema` (`src/content/schemas.ts`). Required: slug/title/summary/category. Optional: status, featured, order, tags, tech, repoUrl, liveUrl, cover, coverAlt, gallery, galleryAlt, date, role, highlights, body.
 
-Create one typed file in `src/content/projects/` that satisfies `projectSchema`. It becomes available on the projects index, in filters/search, in the OS app, in the terminal, and as an indexable page. Missing `repoUrl`, `liveUrl`, `cover` and `gallery` are supported; generated covers and hidden buttons handle them.
+Images belong under `public/projects/<slug>/`. Missing cover/gallery fall back safely; generated covers have accessible labels.
 
-## Proof section
+## Proof
 
-The section is hidden until at least one real entry exists in `src/content/proof/`. Never add sample testimonials, certifications or metrics.
+`src/content/proof/` must contain only real, approved entries. Empty collections hide the proof section. Never add sample testimonials/certifications/metrics.
+
+## Translations
+
+UI strings: `src/i18n/messages/{en,fr,ar}.json`. Keep keys aligned across locales. Arabic is RTL; use logical CSS properties.
+
+## Privacy/Contact Accuracy
+
+Quote form only submits when contact env vars are configured. Submissions are sanitized, rate-limited best-effort, and sent through the configured provider; no database storage. Privacy copy must match real behavior.

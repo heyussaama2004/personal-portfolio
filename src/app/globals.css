@@ -61,7 +61,9 @@ html[lang="ar"] {
 }
 
 @utility accent-glow {
-  box-shadow: 0 0 0 1px var(--glow), 0 12px 40px -18px var(--glow);
+  box-shadow:
+    0 0 0 1px var(--glow),
+    0 12px 40px -18px var(--glow);
 }
 
 @layer base {
@@ -129,10 +131,18 @@ html[lang="ar"] {
 .os-wallpaper {
   background-image:
     radial-gradient(circle at 20% 20%, var(--glow), transparent 38%),
-    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--accent-secondary) 18%, transparent), transparent 42%),
+    radial-gradient(
+      circle at 80% 70%,
+      color-mix(in srgb, var(--accent-secondary) 18%, transparent),
+      transparent 42%
+    ),
     linear-gradient(to bottom, transparent 95%, var(--border-subtle) 96%),
     linear-gradient(to right, transparent 95%, var(--border-subtle) 96%);
-  background-size: auto, auto, 32px 32px, 32px 32px;
+  background-size:
+    auto,
+    auto,
+    32px 32px,
+    32px 32px;
 }
 
 .boot-pulse {

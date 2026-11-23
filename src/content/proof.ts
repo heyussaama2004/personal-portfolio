@@ -1,7 +1,7 @@
-import { proofCollectionsSchema } from "./schemas";
+import { proofCollectionsSchema } from "./schemas"
 
 export const proof = proofCollectionsSchema.parse({
   testimonials: [],
   certifications: [],
   metrics: [],
-});
+})

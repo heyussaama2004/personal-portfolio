@@ -38,3 +38,10 @@ Ruling: JSON-LD Person/WebSite/BreadcrumbList is generated from siteConfig and c
 Ruling: Open Graph images use dynamic 
 ext/og routes per locale and per project, and project/detail/gallery images require descriptive alt text from content or localized fallbacks ??" keeps social previews and accessibility honest ??" cost: OG routes add dynamic image endpoints.
 Task 7: complete (base 23c613e; SEO helpers, JSON-LD, sitemap/robots, dynamic OG images, per-locale metadata/canonical/hreflang+x-default, privacy page, nonce CSP/security headers in proxy, semantic alt text; npm test ??' 73 passed; lint, typecheck, build green; Chromium e2e ??' 16 passed, 3 skipped; seo e2e ??' 5 passed).
+Ruling: Task 8 hardening uses Playwright+axe for automated a11y/keyboard/RTL checks and local Lighthouse runs on production build; no external paid auditing service — cost: Lighthouse scores are local-environment evidence, must be rechecked on deployed HTTPS URL.
+Ruling: bundle budget is enforced by scripts/check-bundle-budget.mjs against .next/build-manifest.json root main+polyfill chunks, with 
+pm run perf:budget in CI — cost: budget tracks root chunk payload, not all route-level async chunks.
+Ruling: locale routes remain orce-dynamic because nonce CSP is applied in src/proxy.ts and layout reads x-nonce for inline scripts — cost: loses static HTML prerendering for locale pages, but keeps strict CSP.
+Ruling: formatting normalized with Prettier across repo after hardening edits; 
+ext-env.d.ts restored to git state before commit — cost: large formatting diff, no behavior change intended.
+Task 8: complete (base 8750c7d; axe/keyboard/RTL/mobile hardening tests, a11y fixes for heading order/skip-link/main focus, bundle budget script+CI, docs+final report; lint/typecheck pass; npm test 73 passed; build green; perf:budget pass rootMain+polyfill 556891/600000; Playwright chromium 30 passed/3 skipped; firefox+webkit+mobile smoke+seo+os+terminal+quote 45 passed/9 skipped, mobile os+terminal rerun 7 passed; Lighthouse /en 99/96/96/92, /en/privacy 98/96/96/92).

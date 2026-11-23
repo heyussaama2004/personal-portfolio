@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { ArrowUpRight, ExternalLink } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "@/components/ui/language-switcher";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Link } from "@/i18n/navigation";
-import type { TerminalAction } from "@/lib/os/terminal/types";
-import type { OsData } from "@/lib/os/types";
-import { TerminalApp } from "@/components/os/terminal/terminal-app";
-import type { WindowAppId } from "@/lib/os/window-manager/types";
+import { ArrowUpRight, ExternalLink } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
+import { Link } from "@/i18n/navigation"
+import type { TerminalAction } from "@/lib/os/terminal/types"
+import type { OsData } from "@/lib/os/types"
+import { TerminalApp } from "@/components/os/terminal/terminal-app"
+import type { WindowAppId } from "@/lib/os/window-manager/types"
 
 export function AppContent({
   appId,
@@ -19,18 +19,18 @@ export function AppContent({
   terminalCommand,
   selectedProjectSlug,
 }: {
-  appId: WindowAppId;
-  data: OsData;
-  onReplayBoot: () => void;
-  onResetWindows: () => void;
-  onTerminalAction?: (action: TerminalAction) => void;
-  terminalCommand?: { command: string; nonce: number };
-  selectedProjectSlug?: string;
+  appId: WindowAppId
+  data: OsData
+  onReplayBoot: () => void
+  onResetWindows: () => void
+  onTerminalAction?: (action: TerminalAction) => void
+  terminalCommand?: { command: string; nonce: number }
+  selectedProjectSlug?: string
 }) {
-  const os = useTranslations("os");
-  const common = useTranslations("common");
-  const levels = useTranslations("skills");
-  const projectT = useTranslations("projects");
+  const os = useTranslations("os")
+  const common = useTranslations("common")
+  const levels = useTranslations("skills")
+  const projectT = useTranslations("projects")
 
   if (appId === "projects") {
     return (
@@ -69,7 +69,7 @@ export function AppContent({
           </ul>
         )}
       </div>
-    );
+    )
   }
 
   if (appId === "skills") {
@@ -94,7 +94,7 @@ export function AppContent({
           ))}
         </div>
       </div>
-    );
+    )
   }
 
   if (appId === "about") {
@@ -114,7 +114,7 @@ export function AppContent({
           ))}
         </ul>
       </div>
-    );
+    )
   }
 
   if (appId === "terminal") {
@@ -127,7 +127,7 @@ export function AppContent({
           onAction={onTerminalAction ?? (() => undefined)}
         />
       </div>
-    );
+    )
   }
 
   if (appId === "presence") {
@@ -154,7 +154,7 @@ export function AppContent({
           </ul>
         )}
       </div>
-    );
+    )
   }
 
   if (appId === "contact") {
@@ -192,7 +192,7 @@ export function AppContent({
           {os("openForm")}
         </Link>
       </div>
-    );
+    )
   }
 
   return (
@@ -217,5 +217,5 @@ export function AppContent({
         </button>
       </div>
     </div>
-  );
+  )
 }

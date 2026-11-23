@@ -1,36 +1,41 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
-import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
-import { FallbackBadge } from "@/components/ui/fallback-badge";
-import { SiteFooter } from "@/components/landing/site-footer";
-import { SiteHeader } from "@/components/landing/site-header";
-import { GeneratedCover } from "@/components/projects/generated-cover";
-import { JsonLd } from "@/components/seo/json-ld";
-import { siteConfig } from "@/config/site";
-import { Link } from "@/i18n/navigation";
-import { isLocale, routing } from "@/i18n/routing";
-import { localize } from "@/lib/content/loaders";
-import { getProjectBySlug, getProjectCover, getProjectGallery, getProjects } from "@/lib/content/projects";
-import { buildJsonLd, buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next"
+import Image from "next/image"
+import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react"
+import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
+import { FallbackBadge } from "@/components/ui/fallback-badge"
+import { SiteFooter } from "@/components/landing/site-footer"
+import { SiteHeader } from "@/components/landing/site-header"
+import { GeneratedCover } from "@/components/projects/generated-cover"
+import { JsonLd } from "@/components/seo/json-ld"
+import { siteConfig } from "@/config/site"
+import { Link } from "@/i18n/navigation"
+import { isLocale, routing } from "@/i18n/routing"
+import { localize } from "@/lib/content/loaders"
+import {
+  getProjectBySlug,
+  getProjectCover,
+  getProjectGallery,
+  getProjects,
+} from "@/lib/content/projects"
+import { buildJsonLd, buildMetadata } from "@/lib/seo"
 
-type PageProps = { params: Promise<{ locale: string; slug: string }> };
+type PageProps = { params: Promise<{ locale: string; slug: string }> }
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     getProjects().map((project) => ({ locale, slug: project.slug })),
-  );
+  )
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
-  if (!isLocale(locale)) notFound();
+  const { locale, slug } = await params
+  if (!isLocale(locale)) notFound()
 
-  const project = getProjectBySlug(slug);
-  if (!project) notFound();
+  const project = getProjectBySlug(slug)
+  if (!project) notFound()
 
-  const description = localize(project.summary, locale).value;
+  const description = localize(project.summary, locale).value
 
   return buildMetadata({
     locale,
@@ -38,25 +43,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: project.title,
     description,
     type: "article",
-  });
+  })
 }
 
 export default async function ProjectPage({ params }: PageProps) {
-  const { locale, slug } = await params;
-  if (!isLocale(locale)) notFound();
+  const { locale, slug } = await params
+  if (!isLocale(locale)) notFound()
 
-  const project = getProjectBySlug(slug);
-  if (!project) notFound();
+  const project = getProjectBySlug(slug)
+  if (!project) notFound()
 
-  const t = await getTranslations({ locale, namespace: "projects" });
-  const navT = await getTranslations({ locale, namespace: "nav" });
-  const summary = localize(project.summary, locale);
-  const cover = getProjectCover(project);
-  const gallery = getProjectGallery(project);
-  const configuredCoverAlt = project.coverAlt
-    ? localize(project.coverAlt, locale).value
-    : "";
-  const coverLabel = configuredCoverAlt || t("coverAlt", { title: project.title });
+  const t = await getTranslations({ locale, namespace: "projects" })
+  const navT = await getTranslations({ locale, namespace: "nav" })
+  const summary = localize(project.summary, locale)
+  const cover = getProjectCover(project)
+  const gallery = getProjectGallery(project)
+  const configuredCoverAlt = project.coverAlt ? localize(project.coverAlt, locale).value : ""
+  const coverLabel = configuredCoverAlt || t("coverAlt", { title: project.title })
 
   return (
     <>
@@ -73,7 +76,11 @@ export default async function ProjectPage({ params }: PageProps) {
         })}
       />
       <SiteHeader locale={locale} />
-      <main id="main" className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
+      <main
+        id="main"
+        tabIndex={-1}
+        className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8 sm:py-16"
+      >
         <Link
           href="/projects"
           className="inline-flex items-center gap-2 rounded text-sm text-muted transition-colors hover:text-foreground"
@@ -87,7 +94,13 @@ export default async function ProjectPage({ params }: PageProps) {
             <div className="mb-6 overflow-hidden rounded-xl border border-line">
               {cover ? (
                 <div className="relative h-64 sm:h-80">
-                  <Image src={cover} alt={coverLabel} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover" />
+                  <Image
+                    src={cover}
+                    alt={coverLabel}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    className="object-cover"
+                  />
                 </div>
               ) : (
                 <GeneratedCover title={project.title} label={coverLabel} />
@@ -96,7 +109,9 @@ export default async function ProjectPage({ params }: PageProps) {
 
             <header className="mb-8">
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{project.title}</h1>
+                <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                  {project.title}
+                </h1>
                 {project.featured ? (
                   <span className="rounded-full border border-line px-2 py-1 text-xs text-muted">
                     {t("featured")}
@@ -117,16 +132,22 @@ export default async function ProjectPage({ params }: PageProps) {
                 <h2 className="text-lg font-semibold">{t("details")}</h2>
                 <ul className="mt-4 space-y-3">
                   {project.highlights.map((highlight, index) => {
-                    const text = localize(highlight, locale);
+                    const text = localize(highlight, locale)
                     return (
-                      <li key={index} className="flex gap-3 text-sm leading-relaxed text-foreground/85">
-                        <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      <li
+                        key={index}
+                        className="flex gap-3 text-sm leading-relaxed text-foreground/85"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                        />
                         <span>
                           {text.value}
                           <FallbackBadge show={text.fallbackUsed} />
                         </span>
                       </li>
-                    );
+                    )
                   })}
                 </ul>
               </section>
@@ -137,16 +158,18 @@ export default async function ProjectPage({ params }: PageProps) {
                 <h2 className="text-lg font-semibold">{t("gallery")}</h2>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {gallery.map((asset, index) => {
-                    const galleryAltText = project.galleryAlt[index];
+                    const galleryAltText = project.galleryAlt[index]
                     const configuredAlt = galleryAltText
                       ? localize(galleryAltText, locale).value
-                      : "";
+                      : ""
                     const alt =
-                      configuredAlt ||
-                      t("galleryAlt", { title: project.title, number: index + 1 });
+                      configuredAlt || t("galleryAlt", { title: project.title, number: index + 1 })
 
                     return (
-                      <div key={asset} className="relative h-48 overflow-hidden rounded-lg border border-line">
+                      <div
+                        key={asset}
+                        className="relative h-48 overflow-hidden rounded-lg border border-line"
+                      >
                         <Image
                           src={asset}
                           alt={alt}
@@ -155,7 +178,7 @@ export default async function ProjectPage({ params }: PageProps) {
                           className="object-cover"
                         />
                       </div>
-                    );
+                    )
                   })}
                 </div>
               </section>
@@ -189,21 +212,30 @@ export default async function ProjectPage({ params }: PageProps) {
 
           <aside className="h-fit space-y-6 rounded-xl border border-line bg-surface p-6">
             <div>
-              <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">{t("category")}</h2>
+              <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">
+                {t("category")}
+              </h2>
               <p className="mt-2 text-sm">{t(`categories.${project.category}`)}</p>
             </div>
             {project.role ? (
               <div>
-                <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">{t("role")}</h2>
+                <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  {t("role")}
+                </h2>
                 <p className="mt-2 text-sm">{project.role}</p>
               </div>
             ) : null}
             {project.tech.length > 0 ? (
               <div>
-                <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">{t("stack")}</h2>
+                <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  {t("stack")}
+                </h2>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
-                    <span key={tech} className="rounded-full border border-line px-2 py-1 text-xs text-muted">
+                    <span
+                      key={tech}
+                      className="rounded-full border border-line px-2 py-1 text-xs text-muted"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -222,5 +254,5 @@ export default async function ProjectPage({ params }: PageProps) {
       </main>
       <SiteFooter />
     </>
-  );
+  )
 }

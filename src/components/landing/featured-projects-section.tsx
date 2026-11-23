@@ -1,15 +1,15 @@
-import { getTranslations } from "next-intl/server";
-import { Section } from "@/components/ui/section";
-import { ProjectCard } from "@/components/projects/project-card";
-import type { Locale } from "@/i18n/routing";
-import { getFeaturedProjects, getProjectCover } from "@/lib/content/projects";
+import { getTranslations } from "next-intl/server"
+import { Section } from "@/components/ui/section"
+import { ProjectCard } from "@/components/projects/project-card"
+import type { Locale } from "@/i18n/routing"
+import { getFeaturedProjects, getProjectCover } from "@/lib/content/projects"
 
 export async function FeaturedProjectsSection({ locale }: { locale: Locale }) {
-  const t = await getTranslations("sections");
-  const projectT = await getTranslations("projects");
-  const projects = getFeaturedProjects().slice(0, 3);
+  const t = await getTranslations("sections")
+  const projectT = await getTranslations("projects")
+  const projects = getFeaturedProjects().slice(0, 3)
 
-  if (projects.length === 0) return null;
+  if (projects.length === 0) return null
 
   return (
     <Section id="projects" title={t("projects")} subtitle={t("projectsSubtitle")}>
@@ -25,5 +25,5 @@ export async function FeaturedProjectsSection({ locale }: { locale: Locale }) {
         ))}
       </ul>
     </Section>
-  );
+  )
 }

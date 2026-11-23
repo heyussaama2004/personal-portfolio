@@ -1,5 +1,5 @@
 export function FallbackBadge({ show }: { show: boolean }) {
-  if (!show) return null;
+  if (!show) return null
 
   return (
     <span
@@ -8,5 +8,5 @@ export function FallbackBadge({ show }: { show: boolean }) {
     >
       EN
     </span>
-  );
+  )
 }

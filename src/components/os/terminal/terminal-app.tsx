@@ -1,125 +1,125 @@
-"use client";
+"use client"
 
-import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
-import { getVisibleCommands } from "@/lib/os/commands/registry";
-import { runTerminalCommand } from "@/lib/os/terminal/parser";
-import type { TerminalAction } from "@/lib/os/terminal/types";
-import type { OsData } from "@/lib/os/types";
+import { useTranslations } from "next-intl"
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react"
+import { getVisibleCommands } from "@/lib/os/commands/registry"
+import { runTerminalCommand } from "@/lib/os/terminal/parser"
+import type { TerminalAction } from "@/lib/os/terminal/types"
+import type { OsData } from "@/lib/os/types"
 
-type Line = { id: number; kind: "welcome" | "input" | "output"; text: string };
+type Line = { id: number; kind: "welcome" | "input" | "output"; text: string }
 
-let nextLineId = 0;
+let nextLineId = 0
 
 export function TerminalApp({
   data,
   queuedCommand,
   onAction,
 }: {
-  data: OsData;
-  queuedCommand?: { command: string; nonce: number };
-  onAction: (action: TerminalAction) => void;
+  data: OsData
+  queuedCommand?: { command: string; nonce: number }
+  onAction: (action: TerminalAction) => void
 }) {
-  const t = useTranslations();
-  const [input, setInput] = useState("");
-  const [history, setHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState(-1);
+  const t = useTranslations()
+  const [input, setInput] = useState("")
+  const [history, setHistory] = useState<string[]>([])
+  const [historyIndex, setHistoryIndex] = useState(-1)
   const [lines, setLines] = useState<Line[]>(() => [
     { id: nextLineId++, kind: "welcome", text: t("terminal.welcome") },
-  ]);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const outputRef = useRef<HTMLDivElement>(null);
+  ])
+  const inputRef = useRef<HTMLInputElement>(null)
+  const outputRef = useRef<HTMLDivElement>(null)
 
   const submit = useCallback(
     (command: string) => {
-      const trimmed = command.trim();
-      if (!trimmed) return;
+      const trimmed = command.trim()
+      if (!trimmed) return
 
       const result = runTerminalCommand(command, {
         data,
         locale: data.locale,
         t: (key, values) => t(key, values),
-      });
+      })
 
-      const inputLine: Line = { id: nextLineId++, kind: "input", text: command };
+      const inputLine: Line = { id: nextLineId++, kind: "input", text: command }
       const outputLines: Line[] = result.lines.map((text) => ({
         id: nextLineId++,
         kind: "output",
         text,
-      }));
+      }))
 
       setLines((current) =>
         result.clear ? [inputLine, ...outputLines] : [...current, inputLine, ...outputLines],
-      );
-      setHistory((current) => [...current, command]);
-      setHistoryIndex(-1);
-      setInput("");
+      )
+      setHistory((current) => [...current, command])
+      setHistoryIndex(-1)
+      setInput("")
 
-      if (result.action && result.action.type !== "clear") onAction(result.action);
+      if (result.action && result.action.type !== "clear") onAction(result.action)
     },
     [data, onAction, t],
-  );
+  )
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    inputRef.current?.focus()
+  }, [])
 
   useEffect(() => {
-    outputRef.current?.scrollTo({ top: outputRef.current.scrollHeight });
-  }, [lines]);
+    outputRef.current?.scrollTo({ top: outputRef.current.scrollHeight })
+  }, [lines])
 
   useEffect(() => {
-    if (!queuedCommand) return;
-    const timer = window.setTimeout(() => submit(queuedCommand.command), 0);
-    return () => window.clearTimeout(timer);
-  }, [queuedCommand, submit]);
+    if (!queuedCommand) return
+    const timer = window.setTimeout(() => submit(queuedCommand.command), 0)
+    return () => window.clearTimeout(timer)
+  }, [queuedCommand, submit])
 
   function appendOutput(text: string) {
-    setLines((current) => [...current, { id: nextLineId++, kind: "output", text }]);
+    setLines((current) => [...current, { id: nextLineId++, kind: "output", text }])
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
-      event.preventDefault();
-      submit(input);
-      return;
+      event.preventDefault()
+      submit(input)
+      return
     }
 
     if (event.key === "ArrowUp") {
-      event.preventDefault();
-      if (history.length === 0) return;
-      const next = historyIndex === -1 ? history.length - 1 : Math.max(0, historyIndex - 1);
-      setHistoryIndex(next);
-      setInput(history[next] ?? "");
-      return;
+      event.preventDefault()
+      if (history.length === 0) return
+      const next = historyIndex === -1 ? history.length - 1 : Math.max(0, historyIndex - 1)
+      setHistoryIndex(next)
+      setInput(history[next] ?? "")
+      return
     }
 
     if (event.key === "ArrowDown") {
-      event.preventDefault();
-      if (historyIndex === -1) return;
-      const next = historyIndex + 1;
+      event.preventDefault()
+      if (historyIndex === -1) return
+      const next = historyIndex + 1
       if (next >= history.length) {
-        setHistoryIndex(-1);
-        setInput("");
+        setHistoryIndex(-1)
+        setInput("")
       } else {
-        setHistoryIndex(next);
-        setInput(history[next] ?? "");
+        setHistoryIndex(next)
+        setInput(history[next] ?? "")
       }
-      return;
+      return
     }
 
     if (event.key === "Tab") {
-      event.preventDefault();
-      const parts = input.split(/\s+/);
-      const last = parts.pop() ?? "";
-      const head = parts.length > 0 ? `${parts.join(" ")} ` : "";
+      event.preventDefault()
+      const parts = input.split(/\s+/)
+      const last = parts.pop() ?? ""
+      const head = parts.length > 0 ? `${parts.join(" ")} ` : ""
       const candidates = [
         ...getVisibleCommands().map((command) => command.id),
         ...data.projects.map((project) => project.slug),
-      ];
-      const matches = candidates.filter((candidate) => candidate.startsWith(last.toLowerCase()));
-      if (matches.length === 1) setInput(`${head}${matches[0]}`);
-      else if (matches.length > 1) appendOutput(matches.join("  "));
+      ]
+      const matches = candidates.filter((candidate) => candidate.startsWith(last.toLowerCase()))
+      if (matches.length === 1) setInput(`${head}${matches[0]}`)
+      else if (matches.length > 1) appendOutput(matches.join("  "))
     }
   }
 
@@ -165,5 +165,5 @@ export function TerminalApp({
         />
       </label>
     </div>
-  );
+  )
 }

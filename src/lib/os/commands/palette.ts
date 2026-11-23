@@ -1,34 +1,40 @@
-import { LOCALES, type Locale } from "@/i18n/routing";
-import { COMMANDS, type CommandGroup } from "@/lib/os/commands/registry";
-import type { TerminalAction } from "@/lib/os/terminal/types";
-import type { OsData } from "@/lib/os/types";
-import { APP_IDS } from "@/lib/os/window-manager/types";
+import { LOCALES, type Locale } from "@/i18n/routing"
+import { COMMANDS, type CommandGroup } from "@/lib/os/commands/registry"
+import type { TerminalAction } from "@/lib/os/terminal/types"
+import type { OsData } from "@/lib/os/types"
+import { APP_IDS } from "@/lib/os/window-manager/types"
 
 export type PaletteItem = {
-  id: string;
-  label: string;
-  group: CommandGroup;
-  keywords: string[];
-  action: TerminalAction;
-};
+  id: string
+  label: string
+  group: CommandGroup
+  keywords: string[]
+  action: TerminalAction
+}
 
-export const COMMAND_GROUPS: CommandGroup[] = ["navigation", "apps", "projects", "actions", "contact"];
+export const COMMAND_GROUPS: CommandGroup[] = [
+  "navigation",
+  "apps",
+  "projects",
+  "actions",
+  "contact",
+]
 
 export function groupPaletteItems(items: PaletteItem[]): PaletteItem[] {
-  return COMMAND_GROUPS.flatMap((group) => items.filter((item) => item.group === group));
+  return COMMAND_GROUPS.flatMap((group) => items.filter((item) => item.group === group))
 }
 
 export function buildPaletteItems(data: OsData, t: (key: string) => string): PaletteItem[] {
   const appItems: PaletteItem[] = APP_IDS.map((appId) => {
-    const command = COMMANDS.find((entry) => entry.appId === appId);
+    const command = COMMANDS.find((entry) => entry.appId === appId)
     return {
       id: `app:${appId}`,
       label: t(`os.${appId}`),
       group: command?.group ?? "apps",
       keywords: command?.keywords ?? [appId],
       action: { type: "open-app", appId },
-    };
-  });
+    }
+  })
 
   const projectItems: PaletteItem[] = data.projects.map((project) => ({
     id: `project:${project.slug}`,
@@ -36,7 +42,7 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
     group: "projects",
     keywords: [project.slug, project.category, ...project.tags, ...project.tech],
     action: { type: "open-project", slug: project.slug },
-  }));
+  }))
 
   const languageItems: PaletteItem[] = LOCALES.map((locale: Locale) => ({
     id: `action:lang:${locale}`,
@@ -44,9 +50,9 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
     group: "actions",
     keywords: ["lang", "language", "locale", locale, t("terminal.commands.lang")],
     action: { type: "lang", locale },
-  }));
+  }))
 
-  const contactItems: PaletteItem[] = [];
+  const contactItems: PaletteItem[] = []
   if (data.contact.email) {
     contactItems.push({
       id: "contact:email",
@@ -54,7 +60,7 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
       group: "contact",
       keywords: ["email", "contact", "hire"],
       action: { type: "navigate", href: `mailto:${data.contact.email}` },
-    });
+    })
   }
   if (data.contact.whatsapp) {
     contactItems.push({
@@ -66,7 +72,7 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
         type: "navigate",
         href: `https://wa.me/${data.contact.whatsapp.replace(/\D/g, "")}`,
       },
-    });
+    })
   }
 
   const cvItems: PaletteItem[] =
@@ -80,7 +86,7 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
             keywords: ["cv", "resume", "download"],
             action: { type: "run", command: "cv" },
           },
-        ];
+        ]
 
   const socialItems: PaletteItem[] = data.presence.map((link, index) => ({
     id: `social:${index}`,
@@ -88,7 +94,7 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
     group: "contact",
     keywords: ["social", "presence", "link", link.label],
     action: { type: "navigate", href: link.url },
-  }));
+  }))
 
   const actionItems: PaletteItem[] = [
     {
@@ -105,7 +111,7 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
       keywords: ["home", "landing", "back"],
       action: { type: "navigate", href: "/" },
     },
-  ];
+  ]
 
   return [
     ...appItems,
@@ -115,25 +121,25 @@ export function buildPaletteItems(data: OsData, t: (key: string) => string): Pal
     ...contactItems,
     ...socialItems,
     ...actionItems,
-  ];
+  ]
 }
 
 function matchScore(value: string, query: string): number {
-  const haystack = value.toLowerCase();
-  if (haystack.startsWith(query)) return 0;
-  if (haystack.includes(query)) return 1;
+  const haystack = value.toLowerCase()
+  if (haystack.startsWith(query)) return 0
+  if (haystack.includes(query)) return 1
 
-  let index = 0;
+  let index = 0
   for (const character of haystack) {
-    if (character === query[index]) index += 1;
-    if (index === query.length) return 2;
+    if (character === query[index]) index += 1
+    if (index === query.length) return 2
   }
-  return Number.POSITIVE_INFINITY;
+  return Number.POSITIVE_INFINITY
 }
 
 export function searchPalette(items: PaletteItem[], query: string): PaletteItem[] {
-  const needle = query.trim().toLowerCase();
-  if (!needle) return items;
+  const needle = query.trim().toLowerCase()
+  if (!needle) return items
 
   return items
     .map((item) => ({
@@ -142,5 +148,5 @@ export function searchPalette(items: PaletteItem[], query: string): PaletteItem[
     }))
     .filter((entry) => Number.isFinite(entry.score))
     .sort((a, b) => a.score - b.score || a.item.label.localeCompare(b.item.label))
-    .map((entry) => entry.item);
+    .map((entry) => entry.item)
 }

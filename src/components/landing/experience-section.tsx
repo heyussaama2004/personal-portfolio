@@ -1,11 +1,11 @@
-import { getTranslations } from "next-intl/server";
-import { Section } from "@/components/ui/section";
-import type { Locale } from "@/i18n/routing";
-import { getExperience } from "@/lib/content/loaders";
+import { getTranslations } from "next-intl/server"
+import { Section } from "@/components/ui/section"
+import type { Locale } from "@/i18n/routing"
+import { getExperience } from "@/lib/content/loaders"
 
 export async function ExperienceSection({ locale }: { locale: Locale }) {
-  const t = await getTranslations("sections");
-  const items = getExperience(locale);
+  const t = await getTranslations("sections")
+  const items = getExperience(locale)
 
   return (
     <Section id="experience" title={t("experience")}>
@@ -20,11 +20,13 @@ export async function ExperienceSection({ locale }: { locale: Locale }) {
             <p className="mt-1 text-sm text-foreground/80">{item.organization}</p>
             {item.location ? <p className="mt-1 text-xs text-muted">{item.location}</p> : null}
             {item.description ? (
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{item.description}</p>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+                {item.description}
+              </p>
             ) : null}
           </li>
         ))}
       </ol>
     </Section>
-  );
+  )
 }

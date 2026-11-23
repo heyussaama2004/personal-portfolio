@@ -110,8 +110,8 @@
 
 **Files:** `docs/**`, `tests/e2e/**`, CI workflow, performance budget config.
 
-- [ ] Axe scans per locale/theme, full keyboard check, RTL checks, cross-browser and mobile runs.
-- [ ] Lighthouse budgets, bundle report, performance fixes that preserve accessibility.
-- [ ] Complete README, CONTENT-GUIDE, ARCHITECTURE, DECISIONS, TRANSLATION-REVIEW, EASTER-EGGS, DEPLOYMENT.
-- [ ] Final report with evidence, limitations and the exact content items the owner must provide.
-- [ ] Gate: lint, typecheck, test, build, e2e. Commit `chore: hardening and documentation`.
+- [x] Axe scans per locale/theme, full keyboard check, RTL checks, cross-browser and mobile runs.
+- [x] Lighthouse budgets, bundle report, performance fixes that preserve accessibility.
+- [x] Complete README, CONTENT-GUIDE, ARCHITECTURE, DECISIONS, TRANSLATION-REVIEW, EASTER-EGGS, DEPLOYMENT.
+- [x] Final report with evidence, limitations and the exact content items the owner must provide.
+- [x] Gate: lint, typecheck, test, build, e2e. Commit `chore: hardening and documentation`.

@@ -1,12 +1,12 @@
-import { getTranslations } from "next-intl/server";
-import { Section } from "@/components/ui/section";
-import { FallbackBadge } from "@/components/ui/fallback-badge";
-import type { Locale } from "@/i18n/routing";
-import { getServices } from "@/lib/content/loaders";
+import { getTranslations } from "next-intl/server"
+import { Section } from "@/components/ui/section"
+import { FallbackBadge } from "@/components/ui/fallback-badge"
+import type { Locale } from "@/i18n/routing"
+import { getServices } from "@/lib/content/loaders"
 
 export async function ServicesSection({ locale }: { locale: Locale }) {
-  const t = await getTranslations("sections");
-  const services = getServices(locale);
+  const t = await getTranslations("sections")
+  const services = getServices(locale)
 
   return (
     <Section id="services" title={t("services")} subtitle={t("servicesSubtitle")}>
@@ -28,5 +28,5 @@ export async function ServicesSection({ locale }: { locale: Locale }) {
         ))}
       </ul>
     </Section>
-  );
+  )
 }

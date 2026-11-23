@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { useTranslations } from "next-intl";
-import { useState, type FormEvent } from "react";
-import { quoteSchema } from "@/lib/contact/schema";
+import { useTranslations } from "next-intl"
+import { useState, type FormEvent } from "react"
+import { quoteSchema } from "@/lib/contact/schema"
 
-type ServiceOption = { id: string; title: string };
+type ServiceOption = { id: string; title: string }
 
-type FieldName = "name" | "email" | "projectType" | "budget" | "timeline" | "message" | "consent";
+type FieldName = "name" | "email" | "projectType" | "budget" | "timeline" | "message" | "consent"
 
-type FormState = Record<FieldName, string | boolean>;
+type FormState = Record<FieldName, string | boolean>
 
 const initialState: FormState = {
   name: "",
@@ -18,43 +18,37 @@ const initialState: FormState = {
   timeline: "",
   message: "",
   consent: false,
-};
-
-function fieldId(name: FieldName) {
-  return `quote-${name}`;
 }
 
-export function QuoteForm({
-  enabled,
-  services,
-}: {
-  enabled: boolean;
-  services: ServiceOption[];
-}) {
-  const t = useTranslations("contact");
-  const [form, setForm] = useState<FormState>(initialState);
-  const [honeypot, setHoneypot] = useState("");
-  const [startedAt, setStartedAt] = useState(() => Date.now());
-  const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [statusCode, setStatusCode] = useState<string>();
+function fieldId(name: FieldName) {
+  return `quote-${name}`
+}
+
+export function QuoteForm({ enabled, services }: { enabled: boolean; services: ServiceOption[] }) {
+  const t = useTranslations("contact")
+  const [form, setForm] = useState<FormState>(initialState)
+  const [honeypot, setHoneypot] = useState("")
+  const [startedAt, setStartedAt] = useState(() => Date.now())
+  const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({})
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [statusCode, setStatusCode] = useState<string>()
 
   function update(name: FieldName, value: string | boolean) {
-    setForm((current) => ({ ...current, [name]: value }));
-    setErrors((current) => ({ ...current, [name]: undefined }));
-    setStatus((current) => (current === "loading" ? current : "idle"));
-    setStatusCode(undefined);
+    setForm((current) => ({ ...current, [name]: value }))
+    setErrors((current) => ({ ...current, [name]: undefined }))
+    setStatus((current) => (current === "loading" ? current : "idle"))
+    setStatusCode(undefined)
   }
 
   function describedBy(name: FieldName) {
-    return errors[name] ? `${fieldId(name)}-error` : undefined;
+    return errors[name] ? `${fieldId(name)}-error` : undefined
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus("loading");
-    setErrors({});
-    setStatusCode(undefined);
+    event.preventDefault()
+    setStatus("loading")
+    setErrors({})
+    setStatusCode(undefined)
 
     const submission = {
       name: String(form.name),
@@ -66,21 +60,21 @@ export function QuoteForm({
       consent: form.consent === true,
       website: honeypot,
       startedAt,
-    };
-    const parsed = quoteSchema.safeParse(submission);
+    }
+    const parsed = quoteSchema.safeParse(submission)
     if (!parsed.success) {
-      const nextErrors: Partial<Record<FieldName, string>> = {};
+      const nextErrors: Partial<Record<FieldName, string>> = {}
       for (const issue of parsed.error.issues) {
-        const field = issue.path[0];
-        if (typeof field !== "string") continue;
-        if (field === "consent") nextErrors.consent = t("consentRequired");
-        else if (field === "email") nextErrors.email = t("invalidEmail");
-        else if (field === "message") nextErrors.message = t("minMessage");
-        else if (field in initialState) nextErrors[field as FieldName] = t("required");
+        const field = issue.path[0]
+        if (typeof field !== "string") continue
+        if (field === "consent") nextErrors.consent = t("consentRequired")
+        else if (field === "email") nextErrors.email = t("invalidEmail")
+        else if (field === "message") nextErrors.message = t("minMessage")
+        else if (field in initialState) nextErrors[field as FieldName] = t("required")
       }
-      setErrors(nextErrors);
-      setStatus("idle");
-      return;
+      setErrors(nextErrors)
+      setStatus("idle")
+      return
     }
 
     try {
@@ -88,40 +82,40 @@ export function QuoteForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(parsed.data),
-      });
+      })
       const result = (await response.json().catch(() => ({}))) as {
-        code?: string;
-        fields?: Record<string, string>;
-      };
+        code?: string
+        fields?: Record<string, string>
+      }
 
       if (response.ok) {
-        setStatus("success");
-        setForm(initialState);
-        setHoneypot("");
-        setStartedAt(Date.now());
-        return;
+        setStatus("success")
+        setForm(initialState)
+        setHoneypot("")
+        setStartedAt(Date.now())
+        return
       }
 
       if (result.code === "invalid" && result.fields) {
-        const mapped: Partial<Record<FieldName, string>> = {};
+        const mapped: Partial<Record<FieldName, string>> = {}
         for (const field of Object.keys(result.fields) as FieldName[]) {
-          if (field === "consent") mapped.consent = t("consentRequired");
-          else if (field === "email") mapped.email = t("invalidEmail");
-          else if (field === "message") mapped.message = t("minMessage");
-          else if (field in initialState) mapped[field] = t("required");
+          if (field === "consent") mapped.consent = t("consentRequired")
+          else if (field === "email") mapped.email = t("invalidEmail")
+          else if (field === "message") mapped.message = t("minMessage")
+          else if (field in initialState) mapped[field] = t("required")
         }
-        setErrors(mapped);
+        setErrors(mapped)
       }
-      setStatusCode(result.code);
-      setStatus("error");
+      setStatusCode(result.code)
+      setStatus("error")
     } catch {
-      setStatusCode("network");
-      setStatus("error");
+      setStatusCode("network")
+      setStatus("error")
     }
   }
 
   const fieldClass =
-    "mt-2 h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm text-foreground outline-none transition-colors focus:border-primary";
+    "mt-2 h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm text-foreground outline-none transition-colors focus:border-primary"
 
   if (!enabled) {
     return (
@@ -130,7 +124,7 @@ export function QuoteForm({
           {t("unconfigured")}
         </p>
       </div>
-    );
+    )
   }
 
   return (
@@ -299,11 +293,7 @@ export function QuoteForm({
             <span>{t("consent")}</span>
           </label>
           {errors.consent ? (
-            <p
-              id={`${fieldId("consent")}-error`}
-              role="alert"
-              className="mt-1 text-xs text-danger"
-            >
+            <p id={`${fieldId("consent")}-error`} role="alert" className="mt-1 text-xs text-danger">
               {errors.consent}
             </p>
           ) : null}
@@ -311,13 +301,14 @@ export function QuoteForm({
 
         {status === "error" ? (
           <p role="alert" className="rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm">
-            {statusCode && statusCode !== "invalid"
-              ? t(`status.${statusCode}`)
-              : t("error")}
+            {statusCode && statusCode !== "invalid" ? t(`status.${statusCode}`) : t("error")}
           </p>
         ) : null}
         {status === "success" ? (
-          <p role="status" className="rounded-lg border border-primary/40 bg-primary/10 p-3 text-sm">
+          <p
+            role="status"
+            className="rounded-lg border border-primary/40 bg-primary/10 p-3 text-sm"
+          >
             {t("success")}
           </p>
         ) : null}
@@ -331,5 +322,5 @@ export function QuoteForm({
         </button>
       </form>
     </div>
-  );
+  )
 }

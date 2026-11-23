@@ -1,13 +1,13 @@
-import { getTranslations } from "next-intl/server";
-import { Section } from "@/components/ui/section";
-import { hasProofEntries } from "@/lib/config/visibility";
-import { getProof } from "@/lib/content/loaders";
+import { getTranslations } from "next-intl/server"
+import { Section } from "@/components/ui/section"
+import { hasProofEntries } from "@/lib/config/visibility"
+import { getProof } from "@/lib/content/loaders"
 
 export async function ProofSection() {
-  const t = await getTranslations("sections");
-  const proof = getProof();
+  const t = await getTranslations("sections")
+  const proof = getProof()
 
-  if (!hasProofEntries(proof)) return null;
+  if (!hasProofEntries(proof)) return null
 
   return (
     <Section id="proof" title={t("proof")}>
@@ -40,5 +40,5 @@ export async function ProofSection() {
         ))}
       </div>
     </Section>
-  );
+  )
 }

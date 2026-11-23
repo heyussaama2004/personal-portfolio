@@ -1,4 +1,4 @@
-import { Code2 } from "lucide-react";
+import { Code2 } from "lucide-react"
 
 export function GeneratedCover({ title, label }: { title: string; label?: string }) {
   const initials = title
@@ -7,7 +7,7 @@ export function GeneratedCover({ title, label }: { title: string; label?: string
     .filter(Boolean)
     .join("")
     .slice(0, 2)
-    .toUpperCase();
+    .toUpperCase()
 
   return (
     <div
@@ -20,5 +20,5 @@ export function GeneratedCover({ title, label }: { title: string; label?: string
       </span>
       <Code2 aria-hidden="true" size={36} className="text-primary/70" />
     </div>
-  );
+  )
 }

@@ -1,29 +1,29 @@
-"use client";
+"use client"
 
-import { Search } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
-import type { Project } from "@/content/schemas";
-import type { Locale } from "@/i18n/routing";
-import { filterProjects, getCategories, getTags } from "@/lib/content/project-filter";
-import { ProjectCard } from "./project-card";
+import { Search } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { useMemo, useState } from "react"
+import type { Project } from "@/content/schemas"
+import type { Locale } from "@/i18n/routing"
+import { filterProjects, getCategories, getTags } from "@/lib/content/project-filter"
+import { ProjectCard } from "./project-card"
 
 export function ProjectsBrowser({
   projects,
   covers,
   locale,
 }: {
-  projects: Project[];
-  covers: Record<string, string | undefined>;
-  locale: Locale;
+  projects: Project[]
+  covers: Record<string, string | undefined>
+  locale: Locale
 }) {
-  const t = useTranslations("projects");
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<string>("");
-  const [tag, setTag] = useState<string>("");
+  const t = useTranslations("projects")
+  const [query, setQuery] = useState("")
+  const [category, setCategory] = useState<string>("")
+  const [tag, setTag] = useState<string>("")
 
-  const categories = useMemo(() => getCategories(projects), [projects]);
-  const tags = useMemo(() => getTags(projects), [projects]);
+  const categories = useMemo(() => getCategories(projects), [projects])
+  const tags = useMemo(() => getTags(projects), [projects])
   const visible = useMemo(
     () =>
       filterProjects(
@@ -33,7 +33,7 @@ export function ProjectsBrowser({
         tag || undefined,
       ),
     [projects, query, category, tag],
-  );
+  )
 
   return (
     <div>
@@ -99,5 +99,5 @@ export function ProjectsBrowser({
         </ul>
       )}
     </div>
-  );
+  )
 }

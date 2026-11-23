@@ -1,15 +1,15 @@
-import { ArrowRight, Download, Terminal } from "lucide-react";
-import { getTranslations } from "next-intl/server";
-import { siteConfig } from "@/config/site";
-import { Link } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
-import { availableCvLocales } from "@/lib/config/visibility";
+import { ArrowRight, Download, Terminal } from "lucide-react"
+import { getTranslations } from "next-intl/server"
+import { siteConfig } from "@/config/site"
+import { Link } from "@/i18n/navigation"
+import type { Locale } from "@/i18n/routing"
+import { availableCvLocales } from "@/lib/config/visibility"
 
 export async function Hero({ locale }: { locale: Locale }) {
-  const t = await getTranslations("hero");
-  const common = await getTranslations("common");
-  const cvLocales = availableCvLocales(siteConfig);
-  const headline = siteConfig.owner.headline[locale] ?? siteConfig.owner.headline.en;
+  const t = await getTranslations("hero")
+  const common = await getTranslations("common")
+  const cvLocales = availableCvLocales(siteConfig)
+  const headline = siteConfig.owner.headline[locale] ?? siteConfig.owner.headline.en
 
   return (
     <section className="relative overflow-hidden border-b border-line">
@@ -63,5 +63,5 @@ export async function Hero({ locale }: { locale: Locale }) {
         </div>
       </div>
     </section>
-  );
+  )
 }

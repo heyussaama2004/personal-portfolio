@@ -1,8 +1,8 @@
-import { Code2, Globe, Link2, type LucideIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
-import { Section } from "@/components/ui/section";
-import { siteConfig } from "@/config/site";
-import { configuredSocials } from "@/lib/config/visibility";
+import { Code2, Globe, Link2, type LucideIcon } from "lucide-react"
+import { getTranslations } from "next-intl/server"
+import { Section } from "@/components/ui/section"
+import { siteConfig } from "@/config/site"
+import { configuredSocials } from "@/lib/config/visibility"
 
 const icons: Record<string, LucideIcon> = {
   github: Code2,
@@ -11,19 +11,19 @@ const icons: Record<string, LucideIcon> = {
   youtube: Globe,
   x: Globe,
   other: Link2,
-};
+}
 
 export async function PresenceSection() {
-  const t = await getTranslations("sections");
-  const socials = configuredSocials(siteConfig);
+  const t = await getTranslations("sections")
+  const socials = configuredSocials(siteConfig)
 
-  if (socials.length === 0) return null;
+  if (socials.length === 0) return null
 
   return (
     <Section id="presence" title={t("presence")}>
       <ul className="flex flex-wrap gap-3">
         {socials.map((social) => {
-          const Icon: LucideIcon = icons[social.key] ?? Link2;
+          const Icon: LucideIcon = icons[social.key] ?? Link2
           return (
             <li key={social.key}>
               <a
@@ -36,9 +36,9 @@ export async function PresenceSection() {
                 {social.label}
               </a>
             </li>
-          );
+          )
         })}
       </ul>
     </Section>
-  );
+  )
 }

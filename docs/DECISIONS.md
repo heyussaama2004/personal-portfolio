@@ -1,8 +1,13 @@
 # Decisions
 
-- **npm** — standard Vercel/CI compatibility; no extra package manager requirement.
-- **Typed TypeScript content instead of MDX in V1** — one Zod-validated loader path, no MDX toolchain. Long-form project bodies use structured highlights until MDX is needed.
-- **Developer OS as `/[locale]/os`** — real shareable and crawlable route; landing remains static and light.
-- **Dark default with stored choice** — avoids contradicting the brief's dark default and prevents a flash of the wrong theme; system preference does not override the default.
-- **Resend via `fetch`** — activated only by env vars; avoids a paid-tier SDK dependency.
-- **Feature branch, no linked worktree** — repository started empty; there was no branch state to protect.
+- **npm** - standard Vercel/CI compatibility.
+- **Typed TS/JSON content + Zod** - one validated loader path; no MDX toolchain in V1.
+- **Developer OS at `/[locale]/os`** - real shareable route; landing remains server-first.
+- **Dark default with stored user choice** - no system override; avoids FOUC and spec contradiction.
+- **Resend via `fetch`** - env-activated only; no paid SDK dependency; disabled fallback is honest.
+- **No linked worktree** - repo started empty; feature branch isolation used.
+- **Quote API at `/api/quote`** - avoids Next route/page conflict at localized quote path.
+- **Nonce CSP in `src/proxy.ts`** - security headers enforced; layout forced dynamic and reads nonce for inline theme/JSON-LD scripts.
+- **Root sitemap/robots file conventions** - locale alternates include `x-default`; private surfaces excluded.
+- **JSON-LD from config only** - Person/WebSite/BreadcrumbList omit unconfigured fields; no invented identity/contact data.
+- **Accessibility/perf hardening** - axe/keyboard/RTL/mobile checks added; bundle budget script based on Next build-manifest root chunks.

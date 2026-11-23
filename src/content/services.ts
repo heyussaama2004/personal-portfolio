@@ -1,4 +1,4 @@
-import type { Service } from "./schemas";
+import type { Service } from "./schemas"
 
 export const services: Service[] = [
   {
@@ -85,4 +85,4 @@ export const services: Service[] = [
       ar: "ربط الخدمات الخارجية بعقود واضحة وتحقق وحالات خطأ صريحة.",
     },
   },
-];
+]

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from "react"
 
 export function Section({
   id,
@@ -7,13 +7,13 @@ export function Section({
   as = "h2",
   children,
 }: {
-  id: string;
-  title: string;
-  subtitle?: string;
-  as?: "h1" | "h2";
-  children: ReactNode;
+  id: string
+  title: string
+  subtitle?: string
+  as?: "h1" | "h2"
+  children: ReactNode
 }) {
-  const Heading = as;
+  const Heading = as
 
   return (
     <section id={id} className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
@@ -23,5 +23,5 @@ export function Section({
       </div>
       {children}
     </section>
-  );
+  )
 }

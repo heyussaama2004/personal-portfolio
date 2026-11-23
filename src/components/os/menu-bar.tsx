@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { Home, RotateCcw, Search } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "@/components/ui/language-switcher";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Link } from "@/i18n/navigation";
-import type { OsData } from "@/lib/os/types";
-import type { WindowAppId } from "@/lib/os/window-manager/types";
+import { Home, RotateCcw, Search } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
+import { Link } from "@/i18n/navigation"
+import type { OsData } from "@/lib/os/types"
+import type { WindowAppId } from "@/lib/os/window-manager/types"
 
 export function MenuBar({
   data,
@@ -15,13 +15,13 @@ export function MenuBar({
   onResetWindows,
   onOpenPalette,
 }: {
-  data: OsData;
-  apps: { id: WindowAppId; label: string }[];
-  onOpenApp: (id: WindowAppId) => void;
-  onResetWindows: () => void;
-  onOpenPalette: () => void;
+  data: OsData
+  apps: { id: WindowAppId; label: string }[]
+  onOpenApp: (id: WindowAppId) => void
+  onResetWindows: () => void
+  onOpenPalette: () => void
 }) {
-  const t = useTranslations("os");
+  const t = useTranslations("os")
 
   return (
     <header className="glass mb-4 flex items-center justify-between gap-3 rounded-xl px-3 py-2">
@@ -79,5 +79,5 @@ export function MenuBar({
         <ThemeToggle />
       </div>
     </header>
-  );
+  )
 }

@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl"
+import { useEffect, useState } from "react"
 
 export function BootSequence({ onSkip }: { onSkip: () => void }) {
-  const t = useTranslations("os");
-  const [step, setStep] = useState(0);
+  const t = useTranslations("os")
+  const [step, setStep] = useState(0)
 
   useEffect(() => {
     const timers = [
       window.setTimeout(() => setStep(1), 500),
       window.setTimeout(() => setStep(2), 1200),
-    ];
-    return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, []);
+    ]
+    return () => timers.forEach((timer) => window.clearTimeout(timer))
+  }, [])
 
-  const steps = [t("boot"), t("kernel"), t("apps")];
+  const steps = [t("boot"), t("kernel"), t("apps")]
 
   return (
     <section
@@ -44,5 +44,5 @@ export function BootSequence({ onSkip }: { onSkip: () => void }) {
         {t("skip")}
       </button>
     </section>
-  );
+  )
 }

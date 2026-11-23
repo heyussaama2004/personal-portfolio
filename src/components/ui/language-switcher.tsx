@@ -1,19 +1,23 @@
-"use client";
+"use client"
 
-import { Languages } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing, type Locale } from "@/i18n/routing";
+import { Languages } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
+import { usePathname, useRouter } from "@/i18n/navigation"
+import { routing, type Locale } from "@/i18n/routing"
 
 export function LanguageSwitcher() {
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
-  const t = useTranslations("common");
+  const locale = useLocale()
+  const pathname = usePathname()
+  const router = useRouter()
+  const t = useTranslations("common")
 
   return (
     <label className="relative inline-flex items-center">
-      <Languages aria-hidden="true" size={16} className="pointer-events-none absolute start-2 text-muted" />
+      <Languages
+        aria-hidden="true"
+        size={16}
+        className="pointer-events-none absolute start-2 text-muted"
+      />
       <span className="sr-only">{t("language")}</span>
       <select
         value={locale}
@@ -28,5 +32,5 @@ export function LanguageSwitcher() {
         ))}
       </select>
     </label>
-  );
+  )
 }

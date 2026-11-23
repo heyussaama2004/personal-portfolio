@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import { CornerDownLeft, Search } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { CornerDownLeft, Search } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
 import {
   buildPaletteItems,
   COMMAND_GROUPS,
   groupPaletteItems,
   searchPalette,
   type PaletteItem,
-} from "@/lib/os/commands/palette";
-import type { TerminalAction } from "@/lib/os/terminal/types";
-import type { OsData } from "@/lib/os/types";
+} from "@/lib/os/commands/palette"
+import type { TerminalAction } from "@/lib/os/terminal/types"
+import type { OsData } from "@/lib/os/types"
 
 function optionId(item: PaletteItem) {
-  return `palette-option-${item.id.replace(/[^a-z0-9]/gi, "-")}`;
+  return `palette-option-${item.id.replace(/[^a-z0-9]/gi, "-")}`
 }
 
 export function CommandPalette({
@@ -22,72 +22,66 @@ export function CommandPalette({
   onClose,
   onAction,
 }: {
-  data: OsData;
-  onClose: () => void;
-  onAction: (action: TerminalAction) => void;
+  data: OsData
+  onClose: () => void
+  onAction: (action: TerminalAction) => void
 }) {
-  const t = useTranslations();
-  const [query, setQuery] = useState("");
-  const [activeIndex, setActiveIndex] = useState(0);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations()
+  const [query, setQuery] = useState("")
+  const [activeIndex, setActiveIndex] = useState(0)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const items = useMemo(
-    () => buildPaletteItems(data, (key) => t(key)),
-    [data, t],
-  );
-  const displayed = useMemo(
-    () => groupPaletteItems(searchPalette(items, query)),
-    [items, query],
-  );
-  const active = displayed[activeIndex];
+  const items = useMemo(() => buildPaletteItems(data, (key) => t(key)), [data, t])
+  const displayed = useMemo(() => groupPaletteItems(searchPalette(items, query)), [items, query])
+  const active = displayed[activeIndex]
 
   useEffect(() => {
-    const previous = document.activeElement as HTMLElement | null;
-    inputRef.current?.focus();
-    return () => previous?.focus();
-  }, []);
+    const previous = document.activeElement as HTMLElement | null
+    inputRef.current?.focus()
+    return () => previous?.focus()
+  }, [])
 
   function select(item: PaletteItem) {
-    onAction(item.action);
-    onClose();
+    onAction(item.action)
+    onClose()
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowDown") {
-      event.preventDefault();
-      setActiveIndex((index) => (displayed.length === 0 ? 0 : (index + 1) % displayed.length));
+      event.preventDefault()
+      setActiveIndex((index) => (displayed.length === 0 ? 0 : (index + 1) % displayed.length))
     } else if (event.key === "ArrowUp") {
-      event.preventDefault();
+      event.preventDefault()
       setActiveIndex((index) =>
         displayed.length === 0 ? 0 : (index - 1 + displayed.length) % displayed.length,
-      );
+      )
     } else if (event.key === "Enter") {
-      event.preventDefault();
-      if (active) select(active);
+      event.preventDefault()
+      if (active) select(active)
     } else if (event.key === "Escape") {
-      event.preventDefault();
-      onClose();
+      event.preventDefault()
+      onClose()
     }
   }
 
   function trapFocus(event: KeyboardEvent<HTMLDivElement>) {
-    if (event.key !== "Tab") return;
+    if (event.key !== "Tab") return
     const focusable = rootRef.current?.querySelectorAll<HTMLElement>(
       'input, button:not([tabindex="-1"]), [href]',
-    );
-    if (!focusable || focusable.length === 0) return;
+    )
+    if (!focusable || focusable.length === 0) return
 
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (!first || !last) return;
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (!first || !last) return
 
     if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
+      event.preventDefault()
+      last.focus()
     } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
+      event.preventDefault()
+      first.focus()
     }
   }
 
@@ -120,8 +114,8 @@ export function CommandPalette({
             aria-autocomplete="list"
             value={query}
             onChange={(event) => {
-              setQuery(event.target.value);
-              setActiveIndex(0);
+              setQuery(event.target.value)
+              setActiveIndex(0)
             }}
             onKeyDown={handleKeyDown}
             placeholder={t("palette.placeholder")}
@@ -134,8 +128,8 @@ export function CommandPalette({
             <li className="px-3 py-6 text-center text-sm text-muted">{t("palette.empty")}</li>
           ) : (
             COMMAND_GROUPS.flatMap((group) => {
-              const groupItems = displayed.filter((item) => item.group === group);
-              if (groupItems.length === 0) return [];
+              const groupItems = displayed.filter((item) => item.group === group)
+              if (groupItems.length === 0) return []
               return [
                 <li
                   key={`group-${group}`}
@@ -145,7 +139,7 @@ export function CommandPalette({
                   {t(`palette.${group}`)}
                 </li>,
                 ...groupItems.map((item) => {
-                  const index = displayed.indexOf(item);
+                  const index = displayed.indexOf(item)
                   return (
                     <li key={item.id} role="presentation">
                       <button
@@ -165,14 +159,14 @@ export function CommandPalette({
                         ) : null}
                       </button>
                     </li>
-                  );
+                  )
                 }),
-              ];
+              ]
             })
           )}
         </ul>
         <p className="border-t border-line px-4 py-2 text-xs text-muted">{t("palette.hint")}</p>
       </div>
     </div>
-  );
+  )
 }
