@@ -63,7 +63,8 @@
     "backend": "Backend",
     "databases": "Bases de données",
     "ai": "IA et automatisation",
-    "tools": "Outils"
+    "tools": "Outils",
+    "experience": "Expérience"
   },
   "projects": {
     "all": "Tous",
@@ -135,7 +136,12 @@
     "closeWindow": "Fermer la fenêtre",
     "home": "Accueil",
     "running": "En cours",
-    "fullScreenApp": "Application"
+    "fullScreenApp": "Application",
+    "terminalSoon": "Les commandes du terminal arrivent dans la prochaine version.",
+    "replayBoot": "Rejouer le démarrage",
+    "resetWindows": "Réinitialiser les fenêtres",
+    "noWindows": "Aucune fenêtre ouverte",
+    "backToLauncher": "Retour au lanceur"
   },
   "terminal": {
     "welcome": "Terminal Ussama OS. Tapez help pour voir les commandes.",

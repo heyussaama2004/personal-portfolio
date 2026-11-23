@@ -63,7 +63,8 @@
     "backend": "Backend",
     "databases": "Databases",
     "ai": "AI and automation",
-    "tools": "Tools"
+    "tools": "Tools",
+    "experience": "Experience"
   },
   "projects": {
     "all": "All",
@@ -135,7 +136,12 @@
     "closeWindow": "Close window",
     "home": "Home",
     "running": "Running",
-    "fullScreenApp": "Application"
+    "fullScreenApp": "Application",
+    "terminalSoon": "Terminal commands arrive in the next build.",
+    "replayBoot": "Replay boot",
+    "resetWindows": "Reset windows",
+    "noWindows": "No open windows",
+    "backToLauncher": "Back to launcher"
   },
   "terminal": {
     "welcome": "Ussama OS terminal. Type help for commands.",

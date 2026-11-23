@@ -63,7 +63,8 @@
     "backend": "الخلفية",
     "databases": "قواعد البيانات",
     "ai": "الذكاء الاصطناعي والأتمتة",
-    "tools": "الأدوات"
+    "tools": "الأدوات",
+    "experience": "الخبرة"
   },
   "projects": {
     "all": "الكل",
@@ -135,7 +136,12 @@
     "closeWindow": "إغلاق النافذة",
     "home": "الرئيسية",
     "running": "قيد التشغيل",
-    "fullScreenApp": "تطبيق"
+    "fullScreenApp": "تطبيق",
+    "terminalSoon": "أوامر الطرفية ستتوفر في الإصدار القادم.",
+    "replayBoot": "إعادة تشغيل التسلسل",
+    "resetWindows": "إعادة تعيين النوافذ",
+    "noWindows": "لا توجد نوافذ مفتوحة",
+    "backToLauncher": "العودة إلى المشغّل"
   },
   "terminal": {
     "welcome": "طرفية بيئة المطوّر. اكتب help لعرض الأوامر.",

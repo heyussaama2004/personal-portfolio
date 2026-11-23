@@ -48,6 +48,7 @@ html[lang="ar"] {
   --color-line: var(--border-subtle);
   --color-primary: var(--accent-primary);
   --color-secondary: var(--accent-secondary);
+  --color-danger: #ef4444;
   --font-sans: var(--font-ui);
   --font-mono: var(--font-code-family);
 }
@@ -122,5 +123,25 @@ html[lang="ar"] {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+.os-wallpaper {
+  background-image:
+    radial-gradient(circle at 20% 20%, var(--glow), transparent 38%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--accent-secondary) 18%, transparent), transparent 42%),
+    linear-gradient(to bottom, transparent 95%, var(--border-subtle) 96%),
+    linear-gradient(to right, transparent 95%, var(--border-subtle) 96%);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+}
+
+.boot-pulse {
+  animation: boot-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes boot-pulse {
+  50% {
+    box-shadow: 0 0 0 12px var(--glow);
+    transform: scale(1.04);
   }
 }
