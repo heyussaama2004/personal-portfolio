@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, RotateCcw } from "lucide-react";
+import { Home, RotateCcw, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -13,11 +13,13 @@ export function MenuBar({
   apps,
   onOpenApp,
   onResetWindows,
+  onOpenPalette,
 }: {
   data: OsData;
   apps: { id: WindowAppId; label: string }[];
   onOpenApp: (id: WindowAppId) => void;
   onResetWindows: () => void;
+  onOpenPalette: () => void;
 }) {
   const t = useTranslations("os");
 
@@ -46,6 +48,16 @@ export function MenuBar({
       </div>
 
       <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={onOpenPalette}
+          aria-label={t("commandPalette")}
+          title={t("commandPalette")}
+          className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-surface px-3 text-sm hover:text-primary"
+        >
+          <Search aria-hidden="true" size={16} />
+          <span className="hidden lg:inline">{t("commandPalette")}</span>
+        </button>
         <button
           type="button"
           onClick={onResetWindows}

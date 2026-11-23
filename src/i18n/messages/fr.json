@@ -141,18 +141,49 @@
     "replayBoot": "Rejouer le démarrage",
     "resetWindows": "Réinitialiser les fenêtres",
     "noWindows": "Aucune fenêtre ouverte",
-    "backToLauncher": "Retour au lanceur"
+    "backToLauncher": "Retour au lanceur",
+    "commandPalette": "Palette de commandes"
   },
   "terminal": {
     "welcome": "Terminal Ussama OS. Tapez help pour voir les commandes.",
     "help": "Commandes disponibles :",
+    "helpLine": "{command} : {description}",
     "unknown": "Commande inconnue : {command}",
+    "unknownProject": "Projet inconnu : {slug}",
     "didYouMean": "Vouliez-vous dire {suggestion} ?",
     "clear": "Terminal effacé.",
     "cvUnavailable": "Aucun CV n'est configuré pour cette langue.",
+    "cvAvailable": "CV disponibles : {locales}",
     "themeUsage": "Utilisation : theme [dark|light|toggle]",
     "langUsage": "Utilisation : lang [en|fr|ar]",
-    "contactUnavailable": "Aucun moyen de contact direct n'est configuré."
+    "openUsage": "Utilisation : open [app|projet]",
+    "contactUnavailable": "Aucun moyen de contact direct n'est configuré.",
+    "projectLine": "{title} ({slug})",
+    "skillLine": "{group} : {skills}",
+    "experienceLine": "{title} — {organization}",
+    "easter": {
+      "matrix": "Réveille-toi, Ussama.",
+      "coffee": "Le café est une dépendance de build.",
+      "sudo": "Bien essayé."
+    },
+    "commands": {
+      "help": "Afficher les commandes",
+      "about": "Afficher la courte bio",
+      "projects": "Lister les projets",
+      "skills": "Lister les compétences",
+      "experience": "Lister l'expérience et la formation",
+      "contact": "Afficher les moyens de contact",
+      "cv": "Afficher les CV disponibles",
+      "theme": "Changer de thème",
+      "lang": "Changer de langue",
+      "open": "Ouvrir une application ou un projet",
+      "clear": "Effacer le terminal"
+    }
+  },
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "ar": "العربية"
   },
   "palette": {
     "placeholder": "Rechercher projets et commandes…",

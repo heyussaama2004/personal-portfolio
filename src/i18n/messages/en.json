@@ -141,18 +141,49 @@
     "replayBoot": "Replay boot",
     "resetWindows": "Reset windows",
     "noWindows": "No open windows",
-    "backToLauncher": "Back to launcher"
+    "backToLauncher": "Back to launcher",
+    "commandPalette": "Command palette"
   },
   "terminal": {
     "welcome": "Ussama OS terminal. Type help for commands.",
     "help": "Available commands:",
+    "helpLine": "{command}: {description}",
     "unknown": "Unknown command: {command}",
+    "unknownProject": "Unknown project: {slug}",
     "didYouMean": "Did you mean {suggestion}?",
     "clear": "Terminal cleared.",
     "cvUnavailable": "No CV is configured for this language yet.",
+    "cvAvailable": "CVs: {locales}",
     "themeUsage": "Usage: theme [dark|light|toggle]",
     "langUsage": "Usage: lang [en|fr|ar]",
-    "contactUnavailable": "No direct contact channel is configured yet."
+    "openUsage": "Usage: open [app|project]",
+    "contactUnavailable": "No direct contact channel is configured yet.",
+    "projectLine": "{title} ({slug})",
+    "skillLine": "{group}: {skills}",
+    "experienceLine": "{title} — {organization}",
+    "easter": {
+      "matrix": "Wake up, Ussama.",
+      "coffee": "Coffee is a build dependency.",
+      "sudo": "Nice try."
+    },
+    "commands": {
+      "help": "Show commands",
+      "about": "Show the short bio",
+      "projects": "List projects",
+      "skills": "List skills",
+      "experience": "List experience and education",
+      "contact": "Show contact channels",
+      "cv": "Show available CVs",
+      "theme": "Switch theme",
+      "lang": "Switch language",
+      "open": "Open an app or project",
+      "clear": "Clear the terminal"
+    }
+  },
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "ar": "العربية"
   },
   "palette": {
     "placeholder": "Search projects and commands…",

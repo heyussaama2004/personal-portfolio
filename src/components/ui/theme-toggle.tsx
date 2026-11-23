@@ -4,7 +4,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSyncExternalStore } from "react";
 
-type Theme = "dark" | "light";
+export type Theme = "dark" | "light";
 
 const listeners = new Set<() => void>();
 
@@ -23,15 +23,22 @@ function getServerSnapshot(): Theme {
   return "dark";
 }
 
+export function setTheme(next: Theme): void {
+  document.documentElement.dataset.theme = next;
+  try {
+    window.localStorage.setItem("ol-theme", next);
+  } catch {
+    return;
+  }
+  listeners.forEach((listener) => listener());
+}
+
 export function ThemeToggle() {
   const t = useTranslations("common");
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   function toggleTheme() {
-    const next: Theme = theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    window.localStorage.setItem("ol-theme", next);
-    listeners.forEach((listener) => listener());
+    setTheme(theme === "dark" ? "light" : "dark");
   }
 
   return (

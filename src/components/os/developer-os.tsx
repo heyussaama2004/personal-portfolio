@@ -3,11 +3,15 @@
 import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { AppContent } from "@/components/apps/app-content";
 import { BootSequence } from "@/components/os/boot-sequence";
+import { CommandPalette } from "@/components/os/command-palette/command-palette";
+import { setTheme } from "@/components/ui/theme-toggle";
 import { DesktopWindow } from "@/components/os/desktop-window";
 import { Dock, MobileLauncher } from "@/components/os/dock";
 import { MenuBar } from "@/components/os/menu-bar";
+import type { TerminalAction } from "@/lib/os/terminal/types";
 import type { OsData } from "@/lib/os/types";
 import { isAppId, createInitialState, hydrateWindowState, windowReducer } from "@/lib/os/window-manager/reducer";
 import type { WindowAppId } from "@/lib/os/window-manager/types";
@@ -25,6 +29,11 @@ const APP_IDS: WindowAppId[] = [
 
 export function DeveloperOS({ data }: { data: OsData }) {
   const t = useTranslations("os");
+  const router = useRouter();
+  const pathname = usePathname();
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [terminalCommand, setTerminalCommand] = useState<{ command: string; nonce: number }>();
+  const [selectedProjectSlug, setSelectedProjectSlug] = useState<string>();
   const [booting, setBooting] = useState(() => {
     if (typeof window === "undefined") return true;
     const booted = readString("session", "ol-os-booted") === "1";
@@ -76,6 +85,52 @@ export function DeveloperOS({ data }: { data: OsData }) {
     [isMobile, labels],
   );
 
+  const handleTerminalAction = useCallback(
+    (action: TerminalAction) => {
+      switch (action.type) {
+        case "open-app":
+          openApp(action.appId);
+          break;
+        case "open-project":
+          setSelectedProjectSlug(action.slug);
+          openApp("projects");
+          break;
+        case "run":
+          setTerminalCommand((current) => ({
+            command: action.command,
+            nonce: (current?.nonce ?? 0) + 1,
+          }));
+          openApp("terminal");
+          break;
+        case "navigate":
+          router.push(action.href);
+          break;
+        case "theme": {
+          const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+          setTheme(action.value === "toggle" ? (current === "dark" ? "light" : "dark") : action.value);
+          break;
+        }
+        case "lang":
+          router.replace(pathname, { locale: action.locale });
+          break;
+        case "clear":
+          break;
+      }
+    },
+    [openApp, pathname, router],
+  );
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setPaletteOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   useEffect(() => {
     if (!booting) return;
     const timer = window.setTimeout(finishBoot, 2200);
@@ -120,7 +175,13 @@ export function DeveloperOS({ data }: { data: OsData }) {
 
   return (
     <div className="relative min-h-[70vh]">
-      <MenuBar data={data} apps={apps} onOpenApp={openApp} onResetWindows={resetWindows} />
+      <MenuBar
+        data={data}
+        apps={apps}
+        onOpenApp={openApp}
+        onResetWindows={resetWindows}
+        onOpenPalette={() => setPaletteOpen(true)}
+      />
 
       {isMobile ? (
         mobileApp ? (
@@ -142,6 +203,9 @@ export function DeveloperOS({ data }: { data: OsData }) {
                 data={data}
                 onReplayBoot={replayBoot}
                 onResetWindows={resetWindows}
+                onTerminalAction={handleTerminalAction}
+                terminalCommand={terminalCommand}
+                selectedProjectSlug={selectedProjectSlug}
               />
             </div>
           </section>
@@ -171,12 +235,23 @@ export function DeveloperOS({ data }: { data: OsData }) {
                 data={data}
                 onReplayBoot={replayBoot}
                 onResetWindows={resetWindows}
+                onTerminalAction={handleTerminalAction}
+                terminalCommand={terminalCommand}
+                selectedProjectSlug={selectedProjectSlug}
               />
             </DesktopWindow>
           ))}
           <Dock apps={apps} openIds={state.windows.map((window) => window.id)} onOpenApp={openApp} />
         </div>
       )}
+
+      {paletteOpen ? (
+        <CommandPalette
+          data={data}
+          onClose={() => setPaletteOpen(false)}
+          onAction={handleTerminalAction}
+        />
+      ) : null}
     </div>
   );
 }

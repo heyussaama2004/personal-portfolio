@@ -141,18 +141,49 @@
     "replayBoot": "إعادة تشغيل التسلسل",
     "resetWindows": "إعادة تعيين النوافذ",
     "noWindows": "لا توجد نوافذ مفتوحة",
-    "backToLauncher": "العودة إلى المشغّل"
+    "backToLauncher": "العودة إلى المشغّل",
+    "commandPalette": "لوحة الأوامر"
   },
   "terminal": {
     "welcome": "طرفية بيئة المطوّر. اكتب help لعرض الأوامر.",
     "help": "الأوامر المتاحة:",
+    "helpLine": "{command}: {description}",
     "unknown": "أمر غير معروف: {command}",
+    "unknownProject": "مشروع غير معروف: {slug}",
     "didYouMean": "هل تقصد {suggestion}؟",
     "clear": "تم مسح الطرفية.",
     "cvUnavailable": "لا توجد سيرة ذاتية محددة لهذه اللغة بعد.",
+    "cvAvailable": "السير الذاتية المتاحة: {locales}",
     "themeUsage": "الاستخدام: theme [dark|light|toggle]",
     "langUsage": "الاستخدام: lang [en|fr|ar]",
-    "contactUnavailable": "لا توجد وسيلة تواصل مباشر مُعدّة بعد."
+    "openUsage": "الاستخدام: open [تطبيق|مشروع]",
+    "contactUnavailable": "لا توجد وسيلة تواصل مباشر مُعدّة بعد.",
+    "projectLine": "{title} ({slug})",
+    "skillLine": "{group}: {skills}",
+    "experienceLine": "{title} — {organization}",
+    "easter": {
+      "matrix": "استيقظ يا أسامة.",
+      "coffee": "القهوة تبعية بناء.",
+      "sudo": "محاولة جميلة."
+    },
+    "commands": {
+      "help": "عرض الأوامر",
+      "about": "عرض نبذة قصيرة",
+      "projects": "عرض المشاريع",
+      "skills": "عرض المهارات",
+      "experience": "عرض الخبرة والتعليم",
+      "contact": "عرض وسائل التواصل",
+      "cv": "عرض السير الذاتية المتاحة",
+      "theme": "تغيير المظهر",
+      "lang": "تغيير اللغة",
+      "open": "فتح تطبيق أو مشروع",
+      "clear": "مسح الطرفية"
+    }
+  },
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "ar": "العربية"
   },
   "palette": {
     "placeholder": "ابحث في المشاريع والأوامر…",

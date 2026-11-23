@@ -81,11 +81,11 @@
 
 **Files:** `src/lib/os/terminal/**`, `src/lib/os/commands/**`, `src/components/os/terminal/**`, `src/components/os/command-palette/**`, `tests/unit/**`.
 
-- [ ] Pure parser with `help`, `about`, `projects`, `skills`, `experience`, `contact`, `cv`, `theme`, `lang`, `open`, `clear`; history, tab completion, suggestions, localized output, Easter eggs.
-- [ ] Real input, `aria-live` output, keyboard first, mobile usable.
-- [ ] Cmd/Ctrl+K palette with combobox/listbox semantics, grouped/fuzzy results, focus return, shared registry.
-- [ ] Unit-test every command, args, errors, suggestions and localization; e2e for both UIs.
-- [ ] Gate and commit `feat: terminal and command palette`.
+- [x] Pure parser with `help`, `about`, `projects`, `skills`, `experience`, `contact`, `cv`, `theme`, `lang`, `open`, `clear`; history, tab completion, suggestions, localized output, Easter eggs.
+- [x] Real input, `aria-live` output, keyboard first, mobile usable.
+- [x] Cmd/Ctrl+K palette with combobox/listbox semantics, grouped/fuzzy results, focus return, shared registry.
+- [x] Unit-test every command, args, errors, suggestions and localization; e2e for both UIs.
+- [x] Gate and commit `feat: terminal and command palette`.
 
 ## Task 6: Contact and quote system
 

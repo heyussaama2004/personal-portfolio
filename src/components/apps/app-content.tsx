@@ -5,7 +5,9 @@ import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Link } from "@/i18n/navigation";
+import type { TerminalAction } from "@/lib/os/terminal/types";
 import type { OsData } from "@/lib/os/types";
+import { TerminalApp } from "@/components/os/terminal/terminal-app";
 import type { WindowAppId } from "@/lib/os/window-manager/types";
 
 export function AppContent({
@@ -13,11 +15,17 @@ export function AppContent({
   data,
   onReplayBoot,
   onResetWindows,
+  onTerminalAction,
+  terminalCommand,
+  selectedProjectSlug,
 }: {
   appId: WindowAppId;
   data: OsData;
   onReplayBoot: () => void;
   onResetWindows: () => void;
+  onTerminalAction?: (action: TerminalAction) => void;
+  terminalCommand?: { command: string; nonce: number };
+  selectedProjectSlug?: string;
 }) {
   const os = useTranslations("os");
   const common = useTranslations("common");
@@ -33,7 +41,13 @@ export function AppContent({
         ) : (
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {data.projects.map((project) => (
-              <li key={project.slug} className="rounded-lg border border-line bg-surface p-4">
+              <li
+                key={project.slug}
+                aria-current={project.slug === selectedProjectSlug ? "true" : undefined}
+                className={`rounded-lg border bg-surface p-4 ${
+                  project.slug === selectedProjectSlug ? "border-primary" : "border-line"
+                }`}
+              >
                 <div className="flex items-center gap-2">
                   <h3 className="font-medium">{project.title}</h3>
                   {project.featured ? (
@@ -105,9 +119,13 @@ export function AppContent({
 
   if (appId === "terminal") {
     return (
-      <div>
-        <h2 className="text-lg font-semibold">{os("terminal")}</h2>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted">{os("terminalSoon")}</p>
+      <div className="flex h-full min-h-64 flex-col">
+        <h2 className="mb-3 text-lg font-semibold">{os("terminal")}</h2>
+        <TerminalApp
+          data={data}
+          queuedCommand={terminalCommand}
+          onAction={onTerminalAction ?? (() => undefined)}
+        />
       </div>
     );
   }
