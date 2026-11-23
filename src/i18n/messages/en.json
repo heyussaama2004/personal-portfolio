@@ -72,7 +72,26 @@
     "repo": "Source code",
     "demo": "Live demo",
     "details": "View details",
-    "featured": "Featured"
+    "featured": "Featured",
+    "allCategories": "All categories",
+    "allTags": "All tags",
+    "gallery": "Gallery",
+    "category": "Category",
+    "role": "Role",
+    "stack": "Stack",
+    "openInOs": "Open in Developer OS",
+    "status": {
+      "completed": "Completed",
+      "in-progress": "In progress",
+      "archived": "Archived"
+    },
+    "categories": {
+      "php-mysql": "PHP / MySQL",
+      "web-development": "Web development",
+      "frontend-experiments": "Frontend experiments",
+      "ai-automation": "AI automation",
+      "personal": "Personal"
+    }
   },
   "proof": {
     "empty": "Verified proof will appear here when it is available."

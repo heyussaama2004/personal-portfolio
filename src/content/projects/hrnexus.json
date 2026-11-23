@@ -1,0 +1,28 @@
+{
+  "slug": "hrnexus",
+  "title": "HRNexus",
+  "summary": {
+    "en": "A PHP and MySQL HR and payroll solution for Moroccan businesses.",
+    "fr": "Une solution RH et paie en PHP et MySQL pour les entreprises marocaines.",
+    "ar": "حل لإدارة الموارد البشرية والرواتب باستخدام PHP و MySQL للشركات المغربية."
+  },
+  "category": "php-mysql",
+  "status": "in-progress",
+  "featured": true,
+  "order": 1,
+  "tags": ["PHP", "MySQL", "HR", "Payroll", "Morocco"],
+  "tech": ["PHP", "MySQL"],
+  "role": "Full-stack developer",
+  "highlights": [
+    {
+      "en": "Built with PHP and MySQL.",
+      "fr": "Développé avec PHP et MySQL.",
+      "ar": "مبني باستخدام PHP و MySQL."
+    },
+    {
+      "en": "Designed for HR and payroll workflows in Moroccan businesses.",
+      "fr": "Conçu pour les flux de ressources humaines et de paie dans les entreprises marocaines.",
+      "ar": "مصمم لسير عمل الموارد البشرية والرواتب في الشركات المغربية."
+    }
+  ]
+}

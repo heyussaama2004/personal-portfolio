@@ -72,7 +72,26 @@
     "repo": "الكود المصدري",
     "demo": "عرض حي",
     "details": "عرض التفاصيل",
-    "featured": "مميز"
+    "featured": "مميز",
+    "allCategories": "كل الفئات",
+    "allTags": "كل الوسوم",
+    "gallery": "المعرض",
+    "category": "الفئة",
+    "role": "الدور",
+    "stack": "التقنيات",
+    "openInOs": "فتح في Developer OS",
+    "status": {
+      "completed": "مكتمل",
+      "in-progress": "قيد التطوير",
+      "archived": "مؤرشف"
+    },
+    "categories": {
+      "php-mysql": "PHP / MySQL",
+      "web-development": "تطوير الويب",
+      "frontend-experiments": "تجارب الواجهات",
+      "ai-automation": "أتمتة الذكاء الاصطناعي",
+      "personal": "شخصي"
+    }
   },
   "proof": {
     "empty": "ستظهر الإثباتات الموثّقة هنا عند توفرها."
