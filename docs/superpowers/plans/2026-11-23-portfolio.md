@@ -101,10 +101,10 @@
 
 **Files:** `src/lib/seo/**`, `src/app/[locale]/sitemap.ts`, `robots.ts`, `opengraph-image.tsx`, `src/app/[locale]/privacy/**`, `next.config.ts`, `middleware.ts`.
 
-- [ ] Per-locale metadata, canonical, hreflang with `x-default`, OG/Twitter and dynamic OG images, JSON-LD Person/WebSite/BreadcrumbList from config only.
-- [ ] Sitemap/robots, semantic headings, alt text.
-- [ ] Security headers with nonce-based CSP, privacy page describing real behavior, analytics disabled by default.
-- [ ] Gate and commit `feat: seo privacy security`.
+- [x] Per-locale metadata, canonical, hreflang with `x-default`, OG/Twitter and dynamic OG images, JSON-LD Person/WebSite/BreadcrumbList from config only.
+- [x] Sitemap/robots, semantic headings, alt text.
+- [x] Security headers with nonce-based CSP, privacy page describing real behavior, analytics disabled by default.
+- [x] Gate and commit `feat: seo privacy security`.
 
 ## Task 8: Hardening
 

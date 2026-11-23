@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { FallbackBadge } from "@/components/ui/fallback-badge";
 import type { Project } from "@/content/schemas";
 import { Link } from "@/i18n/navigation";
@@ -19,16 +20,21 @@ export function ProjectCard({
   featuredLabel: string;
 }) {
   const summary = localize(project.summary, locale);
+  const t = useTranslations("projects");
+  const configuredCoverAlt = project.coverAlt
+    ? localize(project.coverAlt, locale).value
+    : "";
+  const coverLabel = configuredCoverAlt || t("coverAlt", { title: project.title });
 
   return (
     <li className="group overflow-hidden rounded-xl border border-line bg-surface">
       <Link href={`/projects/${project.slug}`} className="block rounded-xl">
         {cover ? (
           <div className="relative h-40">
-            <Image src={cover} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+            <Image src={cover} alt={coverLabel} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
           </div>
         ) : (
-          <GeneratedCover title={project.title} />
+          <GeneratedCover title={project.title} label={coverLabel} />
         )}
         <div className="p-5">
           <h3 className="flex items-center font-semibold">

@@ -77,6 +77,8 @@
     "allCategories": "Toutes les catégories",
     "allTags": "Tous les tags",
     "gallery": "Galerie",
+    "coverAlt": "Aperçu de {title}",
+    "galleryAlt": "Image {number} de {title}",
     "category": "Catégorie",
     "role": "Rôle",
     "stack": "Stack",
@@ -126,6 +128,7 @@
     }
   },
   "os": {
+    "title": "Developer OS",
     "boot": "Démarrage de l'espace de travail",
     "kernel": "Montage de l'espace de travail",
     "apps": "Chargement des applications",

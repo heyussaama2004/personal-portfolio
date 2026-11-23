@@ -95,6 +95,7 @@ describe("project loaders", () => {
       tech: [],
       cover: "missing.png",
       gallery: ["exists.png", "missing.png"],
+      galleryAlt: [],
       highlights: [],
     } satisfies Project;
 

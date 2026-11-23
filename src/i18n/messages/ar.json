@@ -77,6 +77,8 @@
     "allCategories": "كل الفئات",
     "allTags": "كل الوسوم",
     "gallery": "المعرض",
+    "coverAlt": "معاينة {title}",
+    "galleryAlt": "صورة {number} من {title}",
     "category": "الفئة",
     "role": "الدور",
     "stack": "التقنيات",
@@ -126,6 +128,7 @@
     }
   },
   "os": {
+    "title": "Developer OS",
     "boot": "جارٍ تشغيل مساحة العمل",
     "kernel": "جارٍ تحميل مساحة العمل",
     "apps": "جارٍ تحميل التطبيقات",

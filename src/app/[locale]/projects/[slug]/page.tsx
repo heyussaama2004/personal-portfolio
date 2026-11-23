@@ -7,10 +7,13 @@ import { FallbackBadge } from "@/components/ui/fallback-badge";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteHeader } from "@/components/landing/site-header";
 import { GeneratedCover } from "@/components/projects/generated-cover";
+import { JsonLd } from "@/components/seo/json-ld";
+import { siteConfig } from "@/config/site";
+import { Link } from "@/i18n/navigation";
 import { isLocale, routing } from "@/i18n/routing";
 import { localize } from "@/lib/content/loaders";
 import { getProjectBySlug, getProjectCover, getProjectGallery, getProjects } from "@/lib/content/projects";
-import { Link } from "@/i18n/navigation";
+import { buildJsonLd, buildMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
@@ -29,17 +32,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const description = localize(project.summary, locale).value;
 
-  return {
+  return buildMetadata({
+    locale,
+    path: `/projects/${project.slug}`,
     title: project.title,
     description,
-    alternates: {
-      canonical: `/${locale}/projects/${project.slug}`,
-      languages: Object.fromEntries(
-        routing.locales.map((item) => [item, `/${item}/projects/${project.slug}`]),
-      ),
-    },
-    openGraph: { title: project.title, description, type: "article" },
-  };
+    type: "article",
+  });
 }
 
 export default async function ProjectPage({ params }: PageProps) {
@@ -50,12 +49,29 @@ export default async function ProjectPage({ params }: PageProps) {
   if (!project) notFound();
 
   const t = await getTranslations({ locale, namespace: "projects" });
+  const navT = await getTranslations({ locale, namespace: "nav" });
   const summary = localize(project.summary, locale);
   const cover = getProjectCover(project);
   const gallery = getProjectGallery(project);
+  const configuredCoverAlt = project.coverAlt
+    ? localize(project.coverAlt, locale).value
+    : "";
+  const coverLabel = configuredCoverAlt || t("coverAlt", { title: project.title });
 
   return (
     <>
+      <JsonLd
+        data={buildJsonLd({
+          config: siteConfig,
+          locale,
+          path: `/projects/${project.slug}`,
+          breadcrumbs: [
+            { name: navT("home"), path: "/" },
+            { name: navT("projects"), path: "/projects" },
+            { name: project.title, path: `/projects/${project.slug}` },
+          ],
+        })}
+      />
       <SiteHeader locale={locale} />
       <main id="main" className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
         <Link
@@ -71,10 +87,10 @@ export default async function ProjectPage({ params }: PageProps) {
             <div className="mb-6 overflow-hidden rounded-xl border border-line">
               {cover ? (
                 <div className="relative h-64 sm:h-80">
-                  <Image src={cover} alt="" fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover" />
+                  <Image src={cover} alt={coverLabel} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover" />
                 </div>
               ) : (
-                <GeneratedCover title={project.title} />
+                <GeneratedCover title={project.title} label={coverLabel} />
               )}
             </div>
 
@@ -120,11 +136,27 @@ export default async function ProjectPage({ params }: PageProps) {
               <section className="mb-10">
                 <h2 className="text-lg font-semibold">{t("gallery")}</h2>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {gallery.map((asset) => (
-                    <div key={asset} className="relative h-48 overflow-hidden rounded-lg border border-line">
-                      <Image src={asset} alt="" fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
-                    </div>
-                  ))}
+                  {gallery.map((asset, index) => {
+                    const galleryAltText = project.galleryAlt[index];
+                    const configuredAlt = galleryAltText
+                      ? localize(galleryAltText, locale).value
+                      : "";
+                    const alt =
+                      configuredAlt ||
+                      t("galleryAlt", { title: project.title, number: index + 1 });
+
+                    return (
+                      <div key={asset} className="relative h-48 overflow-hidden rounded-lg border border-line">
+                        <Image
+                          src={asset}
+                          alt={alt}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 50vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </section>
             ) : null}

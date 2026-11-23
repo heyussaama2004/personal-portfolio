@@ -7,7 +7,8 @@ import { SiteHeader } from "@/components/landing/site-header";
 import { Section } from "@/components/ui/section";
 import { siteConfig } from "@/config/site";
 import { getServices } from "@/lib/content/loaders";
-import { isLocale, routing } from "@/i18n/routing";
+import { isLocale } from "@/i18n/routing";
+import { buildMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -16,15 +17,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!isLocale(locale)) notFound();
   const t = await getTranslations({ locale, namespace: "contact" });
 
-  return {
+  return buildMetadata({
+    locale,
+    path: "/quote",
     title: t("openForm"),
     description: t("description"),
-    alternates: {
-      canonical: `/${locale}/quote`,
-      languages: Object.fromEntries(routing.locales.map((item) => [item, `/${item}/quote`])),
-    },
-    robots: { index: false, follow: true },
-  };
+    indexable: false,
+  });
 }
 
 export default async function QuotePage({ params }: PageProps) {

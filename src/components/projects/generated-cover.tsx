@@ -1,6 +1,6 @@
 import { Code2 } from "lucide-react";
 
-export function GeneratedCover({ title }: { title: string }) {
+export function GeneratedCover({ title, label }: { title: string; label?: string }) {
   const initials = title
     .split(/\s+/)
     .map((word) => word[0])
@@ -10,7 +10,11 @@ export function GeneratedCover({ title }: { title: string }) {
     .toUpperCase();
 
   return (
-    <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-primary/25 via-secondary/15 to-transparent">
+    <div
+      role="img"
+      aria-label={label ?? title}
+      className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-primary/25 via-secondary/15 to-transparent"
+    >
       <span aria-hidden="true" className="absolute text-6xl font-bold text-foreground/5">
         {initials}
       </span>

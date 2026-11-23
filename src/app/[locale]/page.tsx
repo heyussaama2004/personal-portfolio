@@ -11,7 +11,8 @@ import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteHeader } from "@/components/landing/site-header";
 import { SkillsSection } from "@/components/landing/skills-section";
 import { siteConfig } from "@/config/site";
-import { isLocale, routing } from "@/i18n/routing";
+import { isLocale } from "@/i18n/routing";
+import { buildMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -22,23 +23,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = siteConfig.owner.headline[locale] ?? siteConfig.owner.headline.en;
   const title = `${siteConfig.owner.name} — ${siteConfig.owner.monogram}`;
 
-  return {
-    title: { default: title, template: `%s | ${siteConfig.owner.name}` },
+  return buildMetadata({
+    locale,
+    path: "/",
+    title,
     description,
-    alternates: {
-      canonical: `/${locale}`,
-      languages: Object.fromEntries(routing.locales.map((item) => [item, `/${item}`])),
-    },
-    openGraph: {
-      title,
-      description,
-      locale,
-      siteName: siteConfig.owner.name,
-      type: "website",
-      images: siteConfig.site.ogImage ? [siteConfig.site.ogImage] : undefined,
-    },
-    robots: { index: true, follow: true },
-  };
+    ...(siteConfig.site.ogImage ? { images: [siteConfig.site.ogImage] } : {}),
+  });
 }
 
 export default async function HomePage({ params }: PageProps) {

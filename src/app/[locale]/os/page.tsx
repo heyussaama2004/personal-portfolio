@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteHeader } from "@/components/landing/site-header";
 import { OsLoader } from "@/app/[locale]/os/os-loader";
@@ -8,8 +10,23 @@ import { availableCvLocales, canShowEmail, canShowWhatsapp, configuredSocials } 
 import { getExperience, getSkills, localize } from "@/lib/content/loaders";
 import { getProjects } from "@/lib/content/projects";
 import type { OsData } from "@/lib/os/types";
+import { buildMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const t = await getTranslations({ locale, namespace: "os" });
+
+  return buildMetadata({
+    locale,
+    path: "/os",
+    title: t("title"),
+    description: siteConfig.owner.headline[locale] ?? siteConfig.owner.headline.en,
+    indexable: false,
+  });
+}
 
 export default async function OsPage({ params }: PageProps) {
   const { locale } = await params;
