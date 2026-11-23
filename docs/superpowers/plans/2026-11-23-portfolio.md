@@ -35,47 +35,47 @@
 
 **Files:** `package.json`, `next.config.ts`, `tsconfig.json`, `postcss.config.mjs`, `eslint.config.mjs`, `.prettierrc`, `vitest.config.ts`, `playwright.config.ts`, `src/app/globals.css`, `src/app/[locale]/layout.tsx`, `src/i18n/**`, `src/config/site.ts`, `src/content/schemas.ts`, `docs/**`, `.github/workflows/ci.yml`, `.env.example`.
 
-- [ ] Scaffold Next.js App Router + TypeScript + Tailwind, install required dependencies only.
-- [ ] Add strict TS config, ESLint (Next + jsx-a11y + import), Prettier, Vitest, Playwright, CI skeleton.
-- [ ] Define CSS-variable design tokens for dark/light, glass and non-blur fallbacks, focus rings, reduced motion.
-- [ ] Wire next-intl routing with `/[locale]`, `<html lang/dir>`, locale switcher foundation and message files.
-- [ ] Implement Zod site config and content schemas with optional fields; build fails loudly on invalid config, never on missing optional values.
-- [ ] Unit-test config visibility helpers (social/CV/WhatsApp/proof) and schema optionality.
-- [ ] Write docs skeleton and `.env.example`.
-- [ ] Gate: lint, typecheck, unit tests, build. Commit `feat: foundation`.
+- [x] Scaffold Next.js App Router + TypeScript + Tailwind, install required dependencies only.
+- [x] Add strict TS config, ESLint (Next + jsx-a11y + import), Prettier, Vitest, Playwright, CI skeleton.
+- [x] Define CSS-variable design tokens for dark/light, glass and non-blur fallbacks, focus rings, reduced motion.
+- [x] Wire next-intl routing with `/[locale]`, `<html lang/dir>`, locale switcher foundation and message files.
+- [x] Implement Zod site config and content schemas with optional fields; build fails loudly on invalid config, never on missing optional values.
+- [x] Unit-test config visibility helpers (social/CV/WhatsApp/proof) and schema optionality.
+- [x] Write docs skeleton and `.env.example`.
+- [x] Gate: lint, typecheck, unit tests, build. Commit `feat: foundation`.
 
 ## Task 2: Landing page
 
 **Files:** `src/app/[locale]/page.tsx`, `src/components/landing/**`, `src/lib/content/**`, metadata helpers.
 
-- [ ] Implement sections in order: hero, services, featured projects, skills, experience/education, proof, digital presence, contact CTA, footer.
-- [ ] Use typed loaders; hide proof until real entries exist; hide unconfigured CV/social/email/WhatsApp everywhere.
-- [ ] Sticky navigation, responsive layout, theme and language switchers, skip link.
-- [ ] Basic per-locale metadata and conditional "Enter Developer OS" CTA.
-- [ ] Unit-test loaders and conditional visibility; e2e smoke for landing.
-- [ ] Gate: lint, typecheck, unit, e2e smoke, build. Commit `feat: landing page`.
+- [x] Implement sections in order: hero, services, featured projects, skills, experience/education, proof, digital presence, contact CTA, footer.
+- [x] Use typed loaders; hide proof until real entries exist; hide unconfigured CV/social/email/WhatsApp everywhere.
+- [x] Sticky navigation, responsive layout, theme and language switchers, skip link.
+- [x] Basic per-locale metadata and conditional "Enter Developer OS" CTA.
+- [x] Unit-test loaders and conditional visibility; e2e smoke for landing.
+- [x] Gate: lint, typecheck, unit, e2e smoke, build. Commit `feat: landing page`.
 
 ## Task 3: Projects system
 
 **Files:** `src/content/projects/**`, `src/app/[locale]/projects/[slug]/page.tsx`, `src/components/projects/**`, `src/lib/content/projects.ts`.
 
-- [ ] One project per typed file with the full content model; add HRNexus using confirmed facts only.
-- [ ] Filters by category/tag and shared search, generated cover fallback, missing asset handling.
-- [ ] Indexable project pages with metadata and OS-app entry points.
-- [ ] Unit-test loader ordering, filtering, missing-asset fallbacks and one-file addition.
-- [ ] Gate and commit `feat: projects system`.
+- [x] One project per typed file with the full content model; add HRNexus using confirmed facts only.
+- [x] Filters by category/tag and shared search, generated cover fallback, missing asset handling.
+- [x] Indexable project pages with metadata and OS-app entry points.
+- [x] Unit-test loader ordering, filtering, missing-asset fallbacks and one-file addition.
+- [x] Gate and commit `feat: projects system`.
 
 ## Task 4: Developer OS core
 
 **Files:** `src/app/[locale]/os/**`, `src/components/os/**`, `src/components/apps/**`, `src/lib/os/window-manager/**`.
 
-- [ ] Lazy-loaded OS route, skippable once-per-session boot, reduced-motion auto-skip, non-blocking.
-- [ ] Desktop shell (menu bar, wallpaper, dock), pure window reducer, focus/z-order, minimize/maximize/restore/close.
-- [ ] Mobile launcher with full-screen apps, visible back button and browser-back support.
-- [ ] Apps: Projects, Skills, About, Terminal shell slot, Digital Presence, Contact, optional Settings.
-- [ ] SSR-safe localStorage with try/catch for theme, locale, boot flag and window state.
-- [ ] Unit-test reducer; e2e for boot/skip and window lifecycle.
-- [ ] Gate and commit `feat: developer OS core`.
+- [x] Lazy-loaded OS route, skippable once-per-session boot, reduced-motion auto-skip, non-blocking.
+- [x] Desktop shell (menu bar, wallpaper, dock), pure window reducer, focus/z-order, minimize/maximize/restore/close.
+- [x] Mobile launcher with full-screen apps, visible back button and browser-back support.
+- [x] Apps: Projects, Skills, About, Terminal shell slot, Digital Presence, Contact, optional Settings.
+- [x] SSR-safe localStorage with try/catch for theme, locale, boot flag and window state.
+- [x] Unit-test reducer; e2e for boot/skip and window lifecycle.
+- [x] Gate and commit `feat: developer OS core`.
 
 ## Task 5: Terminal and command palette
 
