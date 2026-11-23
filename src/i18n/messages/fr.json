@@ -1,0 +1,156 @@
+{
+  "common": {
+    "skipToContent": "Aller au contenu",
+    "requestQuote": "Demander un devis",
+    "downloadCv": "Télécharger le CV",
+    "enterOs": "Entrer dans l'OS Développeur",
+    "viewProjects": "Voir les projets",
+    "close": "Fermer",
+    "back": "Retour",
+    "open": "Ouvrir",
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "empty": "Rien ici pour le moment",
+    "language": "Langue",
+    "theme": "Thème",
+    "dark": "Sombre",
+    "light": "Clair",
+    "on": "Activé",
+    "off": "Désactivé",
+    "available": "Disponible",
+    "noDirectContact": "L'envoi direct n'est pas encore activé. Ajoutez un moyen de contact dans la configuration du site."
+  },
+  "nav": {
+    "projects": "Projets",
+    "services": "Services",
+    "cv": "CV",
+    "contact": "Contact",
+    "home": "Accueil"
+  },
+  "hero": {
+    "eyebrow": "Portfolio de développeur",
+    "availability": "Ouvert aux opportunités salariées · Ouvert aux projets freelance · Intéressé par le télétravail",
+    "description": "Je développe des applications web et des automatisations utiles pour les entreprises au Maroc et ailleurs.",
+    "primary": "Demander un devis",
+    "secondary": "Entrer dans l'OS Développeur",
+    "tertiary": "Découvrir les projets"
+  },
+  "sections": {
+    "services": "Services",
+    "servicesSubtitle": "Compétences que je développe et que je propose.",
+    "projects": "Projets sélectionnés",
+    "projectsSubtitle": "Une sélection de travaux, enrichie au fur et à mesure.",
+    "skills": "Compétences",
+    "experience": "Expérience et formation",
+    "proof": "Preuves",
+    "presence": "Présence numérique",
+    "contact": "Contact"
+  },
+  "services": {
+    "website": "Développement de sites web",
+    "business": "Sites vitrines et pages d'atterrissage",
+    "webapp": "Développement d'applications web",
+    "backend": "Développement backend",
+    "automation": "Automatisation par IA et intégration de flux",
+    "api": "Intégrations d'API"
+  },
+  "skills": {
+    "core": "Maîtrisé",
+    "working": "Opérationnel",
+    "learning": "En apprentissage",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Bases de données",
+    "ai": "IA et automatisation",
+    "tools": "Outils"
+  },
+  "projects": {
+    "all": "Tous",
+    "search": "Rechercher un projet",
+    "noResults": "Aucun projet ne correspond à votre recherche.",
+    "repo": "Code source",
+    "demo": "Démo en ligne",
+    "details": "Voir les détails",
+    "featured": "En vedette"
+  },
+  "proof": {
+    "empty": "Les preuves vérifiées apparaîtront ici lorsqu'elles seront disponibles."
+  },
+  "contact": {
+    "title": "Travaillons ensemble",
+    "description": "Parlez-moi de votre projet et je vous répondrai.",
+    "unconfigured": "L'envoi direct n'est pas encore activé. Les moyens de contact apparaîtront ici une fois configurés.",
+    "name": "Nom",
+    "email": "E-mail",
+    "projectType": "Type de projet",
+    "budget": "Budget envisagé (facultatif)",
+    "timeline": "Délai (facultatif)",
+    "message": "Message",
+    "consent": "J'accepte d'être contacté au sujet de ma demande",
+    "submit": "Envoyer la demande",
+    "success": "Votre demande a été envoyée.",
+    "error": "La demande n'a pas pu être envoyée. Veuillez réessayer.",
+    "honeypot": "Laissez ce champ vide"
+  },
+  "os": {
+    "boot": "Démarrage de l'espace de travail",
+    "kernel": "Montage de l'espace de travail",
+    "apps": "Chargement des applications",
+    "ready": "Prêt",
+    "skip": "Passer",
+    "desktop": "Bureau",
+    "menu": "Menu",
+    "appsList": "Applications ouvertes",
+    "projects": "Projets",
+    "skills": "Compétences",
+    "about": "À propos",
+    "terminal": "Terminal",
+    "presence": "Présence",
+    "contact": "Contact",
+    "settings": "Paramètres",
+    "assistant": "Assistant",
+    "minimize": "Réduire",
+    "maximize": "Agrandir",
+    "restore": "Restaurer",
+    "closeWindow": "Fermer la fenêtre",
+    "home": "Accueil",
+    "running": "En cours",
+    "fullScreenApp": "Application"
+  },
+  "terminal": {
+    "welcome": "Terminal Ussama OS. Tapez help pour voir les commandes.",
+    "help": "Commandes disponibles :",
+    "unknown": "Commande inconnue : {command}",
+    "didYouMean": "Vouliez-vous dire {suggestion} ?",
+    "clear": "Terminal effacé.",
+    "cvUnavailable": "Aucun CV n'est configuré pour cette langue.",
+    "themeUsage": "Utilisation : theme [dark|light|toggle]",
+    "langUsage": "Utilisation : lang [en|fr|ar]",
+    "contactUnavailable": "Aucun moyen de contact direct n'est configuré."
+  },
+  "palette": {
+    "placeholder": "Rechercher projets et commandes…",
+    "navigation": "Navigation",
+    "apps": "Applications",
+    "projects": "Projets",
+    "actions": "Actions",
+    "contact": "Contact",
+    "empty": "Aucun résultat.",
+    "open": "Ouvrir",
+    "hint": "Flèches pour naviguer, Entrée pour sélectionner, Échap pour fermer"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "privacy": "Confidentialité",
+    "builtWith": "Construit avec Next.js"
+  },
+  "privacy": {
+    "title": "Confidentialité",
+    "intro": "Ce site limite au minimum la collecte de données.",
+    "storage": "Seules des préférences non personnelles sont enregistrées dans votre navigateur : thème, langue, état du démarrage et fenêtres ouvertes.",
+    "contact": "Lorsque l'envoi direct est activé, les informations transmises sont envoyées au fournisseur de messagerie configuré pour répondre à votre demande. Elles ne sont pas stockées dans une base de données.",
+    "analytics": "Les statistiques sont désactivées par défaut et activées uniquement via la configuration. Aucun traceur publicitaire ou intersite n'est utilisé.",
+    "rights": "Vous pouvez effacer vos préférences à tout moment en vidant le stockage local du site."
+  }
+}

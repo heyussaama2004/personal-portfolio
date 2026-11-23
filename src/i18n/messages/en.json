@@ -1,0 +1,156 @@
+{
+  "common": {
+    "skipToContent": "Skip to content",
+    "requestQuote": "Request a quote",
+    "downloadCv": "Download CV",
+    "enterOs": "Enter Developer OS",
+    "viewProjects": "View projects",
+    "close": "Close",
+    "back": "Back",
+    "open": "Open",
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "empty": "Nothing here yet",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "on": "On",
+    "off": "Off",
+    "available": "Available",
+    "noDirectContact": "Direct submission isn't enabled yet. Add a contact channel in the site configuration to enable it."
+  },
+  "nav": {
+    "projects": "Projects",
+    "services": "Services",
+    "cv": "CV",
+    "contact": "Contact",
+    "home": "Home"
+  },
+  "hero": {
+    "eyebrow": "Developer portfolio",
+    "availability": "Open to job opportunities · Open to freelance projects · Interested in remote opportunities",
+    "description": "I build web applications and practical automation for businesses in Morocco and beyond.",
+    "primary": "Request a quote",
+    "secondary": "Enter Developer OS",
+    "tertiary": "Browse projects"
+  },
+  "sections": {
+    "services": "Services",
+    "servicesSubtitle": "Capabilities I am developing and offering.",
+    "projects": "Featured projects",
+    "projectsSubtitle": "Selected work, with more added as it is completed.",
+    "skills": "Skills",
+    "experience": "Experience and education",
+    "proof": "Proof",
+    "presence": "Digital presence",
+    "contact": "Contact"
+  },
+  "services": {
+    "website": "Website development",
+    "business": "Business websites and landing pages",
+    "webapp": "Web application development",
+    "backend": "Backend development",
+    "automation": "AI automation and workflow integration",
+    "api": "API integrations"
+  },
+  "skills": {
+    "core": "Core",
+    "working": "Working",
+    "learning": "Learning",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Databases",
+    "ai": "AI and automation",
+    "tools": "Tools"
+  },
+  "projects": {
+    "all": "All",
+    "search": "Search projects",
+    "noResults": "No projects match your search.",
+    "repo": "Source code",
+    "demo": "Live demo",
+    "details": "View details",
+    "featured": "Featured"
+  },
+  "proof": {
+    "empty": "Verified proof will appear here when it is available."
+  },
+  "contact": {
+    "title": "Let's work together",
+    "description": "Tell me about your project and I will get back to you.",
+    "unconfigured": "Direct submission isn't enabled yet. Contact channels will appear here once configured.",
+    "name": "Name",
+    "email": "Email",
+    "projectType": "Project type",
+    "budget": "Budget range (optional)",
+    "timeline": "Timeline (optional)",
+    "message": "Message",
+    "consent": "I agree to be contacted about my request",
+    "submit": "Send request",
+    "success": "Your request has been sent.",
+    "error": "The request could not be sent. Please try again.",
+    "honeypot": "Leave this field empty"
+  },
+  "os": {
+    "boot": "Starting workspace",
+    "kernel": "Mounting workspace",
+    "apps": "Loading applications",
+    "ready": "Ready",
+    "skip": "Skip",
+    "desktop": "Desktop",
+    "menu": "Menu",
+    "appsList": "Open applications",
+    "projects": "Projects",
+    "skills": "Skills",
+    "about": "About",
+    "terminal": "Terminal",
+    "presence": "Presence",
+    "contact": "Contact",
+    "settings": "Settings",
+    "assistant": "Assistant",
+    "minimize": "Minimize",
+    "maximize": "Maximize",
+    "restore": "Restore",
+    "closeWindow": "Close window",
+    "home": "Home",
+    "running": "Running",
+    "fullScreenApp": "Application"
+  },
+  "terminal": {
+    "welcome": "Ussama OS terminal. Type help for commands.",
+    "help": "Available commands:",
+    "unknown": "Unknown command: {command}",
+    "didYouMean": "Did you mean {suggestion}?",
+    "clear": "Terminal cleared.",
+    "cvUnavailable": "No CV is configured for this language yet.",
+    "themeUsage": "Usage: theme [dark|light|toggle]",
+    "langUsage": "Usage: lang [en|fr|ar]",
+    "contactUnavailable": "No direct contact channel is configured yet."
+  },
+  "palette": {
+    "placeholder": "Search projects and commands…",
+    "navigation": "Navigation",
+    "apps": "Applications",
+    "projects": "Projects",
+    "actions": "Actions",
+    "contact": "Contact",
+    "empty": "No results found.",
+    "open": "Open",
+    "hint": "Use arrow keys to navigate, Enter to select, Esc to close"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "builtWith": "Built with Next.js"
+  },
+  "privacy": {
+    "title": "Privacy",
+    "intro": "This site keeps data collection to a minimum.",
+    "storage": "Only non-personal preferences are stored in your browser: theme, language, boot state and open windows.",
+    "contact": "When direct submission is enabled, the details you submit are sent to the configured email provider to answer your request. They are not stored in a database.",
+    "analytics": "Analytics are disabled by default and enabled only through configuration. No advertising or cross-site trackers are used.",
+    "rights": "You can clear your preferences at any time by clearing this site's browser storage."
+  }
+}
