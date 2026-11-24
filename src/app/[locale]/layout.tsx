@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 import type { Metadata } from "next"
 import { headers } from "next/headers"
 import { IBM_Plex_Sans_Arabic, Inter, JetBrains_Mono } from "next/font/google"
+import Script from "next/script"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
@@ -70,10 +71,13 @@ export default async function LocaleLayout({
       data-theme="dark"
       suppressHydrationWarning
     >
-      <head>
-        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className={`${latinFont.variable} ${arabicFont.variable} ${monoFont.variable}`}>
+        <Script
+          id="theme-script"
+          nonce={nonce}
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
         <JsonLd
           data={buildJsonLd({
             config: siteConfig,
